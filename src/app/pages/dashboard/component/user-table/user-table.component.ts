@@ -4,6 +4,7 @@ import {ColumnItem} from "../../../../interface/table/column-item";
 import {Router} from "@angular/router";
 import {VendorService} from "../../../../service/vendor/vendor.service";
 import {finalize} from "rxjs";
+import {IUser} from "../../../../interface/user/i-user";
 
 @Component({
   selector: 'user-table',
@@ -18,8 +19,8 @@ export class UserTableComponent implements OnInit {
   validateForm!: UntypedFormGroup;
   showToken: boolean = false;
 
-  userList: any[] = [];
-  filterUserList: any[] = [];
+  userList: IUser[] = [];
+  filterUserList: IUser[] = [];
 
   constructor(private router: Router,
               private fb: UntypedFormBuilder,
@@ -109,7 +110,7 @@ export class UserTableComponent implements OnInit {
       this.filterUserList = this.userList;
     } else {
       this.filterUserList = this.userList.filter((items) => {
-        return this.isMatch(items.project_name);
+        return this.isMatch(items.username) || this.isMatch(items.email);
       });
     }
   }
@@ -117,6 +118,5 @@ export class UserTableComponent implements OnInit {
   isMatch(str: string): boolean {
     return str.toLocaleLowerCase().includes(this.validateForm.value.searchKey.toLowerCase());
   }
-
 
 }

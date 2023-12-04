@@ -15,4 +15,5 @@ export class VendorService {
   getUserList(): Observable<IUser[]> {
     return this.vendorRestService.getUserList();
   }
+
 }
