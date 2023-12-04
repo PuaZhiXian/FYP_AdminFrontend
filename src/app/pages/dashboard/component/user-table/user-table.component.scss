@@ -1,0 +1,20 @@
+.trid th {
+  background-color: #10064D;
+  color: white;
+  font-weight: 700;
+  padding: 5px 10px;
+}
+
+.ant-table-tbody > tr.ant-table-row > td {
+  padding: 5px 16px;
+}
+
+table:hover,
+tr:hover,
+thead:hover {
+  background: #F5F5F5 !important;
+}
+
+.ant-table-tbody > tr.ant-table-row:hover > td {
+  background: none !important;
+}

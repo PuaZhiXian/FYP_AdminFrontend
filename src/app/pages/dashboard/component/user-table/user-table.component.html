@@ -1,0 +1,58 @@
+<div class="my-2">
+  <div class="flex items-center">
+    <div>
+      <button nz-button nzType="text"
+              class="flex items-center">
+        <div class="material-icons-outlined lg:text-button text-xs">add</div>
+        <div class="lg:text-button text-xs">Create New Project</div>
+      </button>
+    </div>
+    <div class="ml-6 w-1/2">
+      <form nz-form [formGroup]="validateForm">
+        <nz-form-item class="mb-0">
+          <nz-form-control>
+            <nz-input-group nzSearch nzSize="large" class="rounded bg-[#F5F5F5] focus:shadow-xl active:shadow-xl "
+                            [nzPrefix]="prefixIcon">
+              <input class="bg-[#F5F5F5] text-[#52606D] text-input" formControlName="searchKey"
+                     placeholder="Search Project" nz-input/>
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+      </form>
+    </div>
+  </div>
+  <div class="my-6" *ngIf="!loadingTable; else loadingTpl">
+    <nz-table #filterTable [nzData]="filterUserList"
+              nzTableLayout="fixed">
+      <thead>
+      <tr class="trid">
+        <th *ngFor="let column of listOfColumns"
+            [nzShowSort]="!(column.sortFn === null)"
+            [nzSortOrder]="column.sortOrder"
+            [nzSortFn]="column.sortFn"
+            [nzWidth]="column.width"
+            class="lg:text-table-header text-xs"
+            [nzSortDirections]="column.sortDirections">
+          {{column.name}}
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let data of filterTable.data; let i = index" class=" hover:bg-[#F5F5F5]">
+        <td class="cursor-pointer lg:text-table-row text-xs">{{ i + 1}}</td>
+        <td class="cursor-pointer lg:text-table-row text-xs">{{ data.project_name }}</td>
+        <td class="cursor-pointer lg:text-table-row text-xs">{{ data.description }}</td>
+        <td class="cursor-pointer lg:text-table-row text-xs">{{ data.createdAt |date : 'd MMMM y' }}</td>
+      </tr>
+      </tbody>
+    </nz-table>
+  </div>
+</div>
+
+<ng-template #loadingTpl>
+  <nz-skeleton></nz-skeleton>
+</ng-template>
+
+<ng-template #prefixIcon>
+  <span class=" text-[#52606D] material-icons-outlined text-input">search</span>
+</ng-template>
