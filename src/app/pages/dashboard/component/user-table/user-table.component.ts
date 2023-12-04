@@ -32,6 +32,7 @@ export class UserTableComponent implements OnInit {
     this.initProject();
     this.initTable();
     this.initForm();
+    this.changeHandler();
   }
 
   initProject() {
@@ -94,8 +95,7 @@ export class UserTableComponent implements OnInit {
 
   initForm() {
     this.validateForm = this.fb.group({
-      searchKey: [null, []],
-      password: [null, []]
+      searchKey: [null, []]
     });
   }
 

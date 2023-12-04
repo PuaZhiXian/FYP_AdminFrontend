@@ -15,7 +15,7 @@ export class VendorRestService {
   }
 
   getUserList(): Observable<IUser[]> {
-    return this.httpClient.get<IUser[]>(this.ProjectUrl + '/custom/get-project-api-collection/', {withCredentials: true});
+    return this.httpClient.get<IUser[]>(this.ProjectUrl + '/custom/getVendorList', {withCredentials: true});
   }
 
 }
