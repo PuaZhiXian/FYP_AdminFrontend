@@ -13,11 +13,12 @@ import {CommonModule} from "@angular/common";
 import {NzSkeletonModule} from "ng-zorro-antd/skeleton";
 import {NzModalModule} from "ng-zorro-antd/modal";
 import {NzCardModule} from "ng-zorro-antd/card";
+import { NotificationTableComponent } from './component/notification-table/notification-table.component';
 
 
 @NgModule({
     imports: [DashboardRoutingModule, HeaderModule, NzButtonModule, NzFormModule, ReactiveFormsModule, NzInputModule, NzTableModule, CommonModule, NzSkeletonModule, NzModalModule, NzCardModule],
-  declarations: [DashboardComponent, UserTableComponent],
+  declarations: [DashboardComponent, UserTableComponent, NotificationTableComponent],
   exports: [DashboardComponent]
 })
 export class DashboardModule {

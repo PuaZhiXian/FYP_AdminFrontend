@@ -1,0 +1,59 @@
+<div class="my-2">
+  <nz-card>
+    <div class="flex justify-between items-center">
+      <div class="w-1/2">
+        <form nz-form [formGroup]="validateForm">
+          <nz-form-item class="mb-0">
+            <nz-form-control>
+              <nz-input-group nzSearch nzSize="large" class="rounded bg-[#F5F5F5] focus:shadow-xl active:shadow-xl "
+                              [nzPrefix]="prefixIcon">
+                <input class="bg-[#F5F5F5] text-[#52606D] text-input" formControlName="searchKey"
+                       placeholder="Search Notification" nz-input/>
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+        </form>
+      </div>
+      <div class="">
+        <button class="bg-primary-900 text-white px-[32px]rounded text-button font-bold"
+                nz-button>Add Notification
+        </button>
+      </div>
+    </div>
+    <div class="my-6" *ngIf="!loadingTable; else loadingTpl">
+      <nz-table #filterTable [nzData]="filterNotificationList"
+                nzTableLayout="fixed">
+        <thead>
+        <tr class="trid">
+          <th *ngFor="let column of listOfColumns"
+              [nzShowSort]="!(column.sortFn === null)"
+              [nzSortOrder]="column.sortOrder"
+              [nzSortFn]="column.sortFn"
+              [nzWidth]="column.width"
+              class="lg:text-table-header text-xs"
+              [nzSortDirections]="column.sortDirections">
+            {{column.name}}
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let data of filterTable.data; let i = index" class=" hover:bg-[#F5F5F5]">
+          <td class="cursor-pointer lg:text-table-row text-xs">{{ data.title}}</td>
+          <td class="cursor-pointer lg:text-table-row text-xs">{{ data.description }}</td>
+          <td class="cursor-pointer lg:text-table-row text-xs">{{ data.startDate| date }}</td>
+          <td class="cursor-pointer lg:text-table-row text-xs">{{ data.endDate| date }}</td>
+          <td class="cursor-pointer lg:text-table-row text-xs">action</td>
+        </tr>
+        </tbody>
+      </nz-table>
+    </div>
+  </nz-card>
+</div>
+
+<ng-template #loadingTpl>
+  <nz-skeleton></nz-skeleton>
+</ng-template>
+
+<ng-template #prefixIcon>
+  <span class=" text-[#52606D] material-icons-outlined text-input">search</span>
+</ng-template>
