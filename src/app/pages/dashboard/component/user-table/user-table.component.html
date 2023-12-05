@@ -16,7 +16,7 @@
       </div>
       <div class="">
         <button class="bg-primary-900 text-white px-[32px]rounded text-button font-bold"
-                nz-button>Add User
+                (click)="addUserModalOpen()" nz-button>Add User
         </button>
       </div>
     </div>
@@ -56,3 +56,32 @@
 <ng-template #prefixIcon>
   <span class=" text-[#52606D] material-icons-outlined text-input">search</span>
 </ng-template>
+
+<nz-modal [(nzVisible)]="addUserModalVisibility" (nzOnCancel)="addUserModalCancel()">
+  <div *nzModalTitle>
+    <div>Add User</div>
+  </div>
+  <div *nzModalContent>
+    <form nz-form [formGroup]="addUserModalValidateForm">
+      <div class="flex items-center">
+        <div class="text-label my-2">Email</div>
+        <div class="w-full">
+          <nz-form-item class="my-0 mx-4">
+            <nz-form-control nzErrorTip="Please input your email address!">
+              <div>
+                <input class="rounded py-[10px] px-[12px] text-[#8898aa] text-input shadow-md"
+                       formControlName="email" placeholder="Email" nz-input/>
+              </div>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+      </div>
+    </form>
+  </div>
+  <div *nzModalFooter>
+    <button class="bg-primary-900 text-white px-[32px]rounded text-button font-bold"
+            (click)="addUserSendEmail()" nz-button>Add & Send Email
+    </button>
+  </div>
+</nz-modal>

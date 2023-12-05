@@ -1,5 +1,5 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {UntypedFormBuilder, UntypedFormGroup} from "@angular/forms";
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 import {ColumnItem} from "../../../../interface/table/column-item";
 import {Router} from "@angular/router";
 import {VendorService} from "../../../../service/vendor/vendor.service";
@@ -17,10 +17,13 @@ export class UserTableComponent implements OnInit {
   loadingTable: boolean = true;
 
   validateForm!: UntypedFormGroup;
+  addUserModalValidateForm!: UntypedFormGroup;
   showToken: boolean = false;
 
   userList: IUser[] = [];
   filterUserList: IUser[] = [];
+
+  addUserModalVisibility: boolean = false;
 
   constructor(private router: Router,
               private fb: UntypedFormBuilder,
@@ -99,6 +102,12 @@ export class UserTableComponent implements OnInit {
     });
   }
 
+  initAddUserModalForm() {
+    this.addUserModalValidateForm = this.fb.group({
+      email: [null, [Validators.required, Validators.email]]
+    });
+  }
+
   changeHandler() {
     this.validateForm.valueChanges.subscribe((value => {
       this.searching();
@@ -117,6 +126,20 @@ export class UserTableComponent implements OnInit {
 
   isMatch(str: string): boolean {
     return str.toLocaleLowerCase().includes(this.validateForm.value.searchKey.toLowerCase());
+  }
+
+  addUserModalOpen() {
+    this.initAddUserModalForm();
+    this.addUserModalVisibility = true;
+  }
+
+
+  addUserModalCancel() {
+    this.addUserModalVisibility = false;
+  }
+
+  addUserSendEmail() {
+
   }
 
 }
