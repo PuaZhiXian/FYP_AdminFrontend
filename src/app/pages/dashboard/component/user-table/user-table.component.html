@@ -56,16 +56,25 @@
           </td>
           <td class="cursor-pointer lg:text-table-row text-xs">
             <div class="flex gap-2 justify-end">
-              <button *ngIf="data.status ==='Pending'" (click)="sendActivationEmail(data.email)"
+              <button *ngIf="data.status ==='Pending'" (click)="sendActivationEmail(data.email)" nz-tooltip
+                      nzTooltipTitle="send activation email" nzTooltipPlacement="left" [nzTooltipMouseEnterDelay]="0.75"
                       class="bg-green-600 p-2 border-0 text-white rounded text-button material-icons-outlined cursor-pointer">
                 forward_to_inbox
               </button>
-              <button (click)="conformingBlockUser(data.id , data.username)"
+              <button *ngIf="data.status !== 'Rejected'" (click)="conformingBlockUser(data.id , data.username)"
+                      nz-tooltip
+                      nzTooltipTitle="block" nzTooltipPlacement="left" [nzTooltipMouseEnterDelay]="0.75"
                       class="bg-red-600 p-2 border-0 text-white rounded text-button material-icons-outlined cursor-pointer">
-                block
+                lock
               </button>
-              <button
-                class="bg-blue-600 p-2 border-0 text-white rounded text-button material-icons-outlined cursor-pointer">
+              <button *ngIf="data.status ==='Rejected'" nz-tooltip
+                      nzTooltipTitle="unblock" nzTooltipPlacement="left" [nzTooltipMouseEnterDelay]="0.75"
+                      class="bg-green-600 p-2 border-0 text-white rounded text-button material-icons-outlined cursor-pointer">
+                lock_open
+              </button>
+              <button nz-tooltip
+                      nzTooltipTitle="open" nzTooltipPlacement="left" [nzTooltipMouseEnterDelay]="0.75"
+                      class="bg-blue-600 p-2 border-0 text-white rounded text-button material-icons-outlined cursor-pointer">
                 open_in_new
               </button>
             </div>
