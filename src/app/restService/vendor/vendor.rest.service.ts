@@ -23,5 +23,9 @@ export class VendorRestService {
     return this.httpClient.post<IMessage>(this.ProjectUrl + '/custom/create-user', userInformation, {withCredentials: true});
   }
 
+  sendActivationEmail(email: string): Observable<IMessage> {
+    return this.httpClient.post<IMessage>(this.ProjectUrl + '/custom/sendEmail', {email}, {withCredentials: true});
+  }
+
 }
 

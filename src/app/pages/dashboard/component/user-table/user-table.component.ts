@@ -153,4 +153,17 @@ export class UserTableComponent implements OnInit {
       })
   }
 
+  sendActivationEmail(email: string) {
+    this.vendorService.sendActivationEmail(email)
+      .subscribe(resp => {
+        if (resp.message) {
+          this.message.success(resp.message);
+          this.initUserList();
+        } else if (resp.error) {
+          this.message.error(resp.error);
+        }
+      })
+  }
+
+
 }

@@ -56,14 +56,16 @@
           </td>
           <td class="cursor-pointer lg:text-table-row text-xs">
             <div class="flex gap-2 justify-end">
-              <button *ngIf="data.status ==='Pending'"
-                      class="bg-green-600 p-2 border-0 text-white rounded text-button material-icons-outlined ">
+              <button *ngIf="data.status ==='Pending'" (click)="sendActivationEmail(data.email)"
+                      class="bg-green-600 p-2 border-0 text-white rounded text-button material-icons-outlined cursor-pointer">
                 forward_to_inbox
               </button>
-              <button class="bg-red-600 p-2 border-0 text-white rounded text-button material-icons-outlined ">
+              <button
+                class="bg-red-600 p-2 border-0 text-white rounded text-button material-icons-outlined cursor-pointer">
                 block
               </button>
-              <button class="bg-blue-600 p-2 border-0 text-white rounded text-button material-icons-outlined ">
+              <button
+                class="bg-blue-600 p-2 border-0 text-white rounded text-button material-icons-outlined cursor-pointer">
                 open_in_new
               </button>
             </div>

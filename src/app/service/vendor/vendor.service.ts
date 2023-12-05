@@ -20,4 +20,8 @@ export class VendorService {
   addUserSendEmail(userInformation: IUser): Observable<IMessage> {
     return this.vendorRestService.addUserSendEmail(userInformation);
   }
+
+  sendActivationEmail(email: string): Observable<IMessage> {
+    return this.vendorRestService.sendActivationEmail(email);
+  }
 }
