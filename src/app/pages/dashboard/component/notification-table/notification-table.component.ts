@@ -3,6 +3,8 @@ import {ColumnItem} from "../../../../interface/table/column-item";
 import {UntypedFormBuilder, UntypedFormGroup} from "@angular/forms";
 import {Router} from "@angular/router";
 import {INotification} from "../../../../interface/notification/i-notification";
+import {NotificationService} from "../../../../service/notification/notification.service";
+import {finalize} from "rxjs";
 
 @Component({
   selector: 'notification-table',
@@ -22,7 +24,8 @@ export class NotificationTableComponent implements OnInit {
 
   constructor(private router: Router,
               private fb: UntypedFormBuilder,
-              private ref: ChangeDetectorRef) {
+              private ref: ChangeDetectorRef,
+              private notificationService: NotificationService) {
   }
 
   ngOnInit(): void {
@@ -33,16 +36,23 @@ export class NotificationTableComponent implements OnInit {
   }
 
   initNotification() {
-    this.notificationList = [
-      {
-        title: 'First Notification',
-        description: 'Alert Developer Use For',
-        startDate: new Date('2001/3/5'),
-        endDate: new Date('2023/3/4')
-      }
-    ]
-    this.filterNotificationList = this.notificationList;
-    this.loadingTable = false;
+    this.notificationService.getNotificationList()
+      .pipe(finalize(() => {
+        this.loadingTable = false;
+        this.ref.detectChanges();
+        this.ref.markForCheck();
+      }))
+      .subscribe((resp) => {
+        this.notificationList = [
+          {
+            title: 'First Notification',
+            description: 'Alert Developer Use For',
+            startDate: new Date('2001/3/5'),
+            endDate: new Date('2023/3/4')
+          }
+        ]
+        this.filterNotificationList = this.notificationList;
+      })
   }
 
   initTable() {
