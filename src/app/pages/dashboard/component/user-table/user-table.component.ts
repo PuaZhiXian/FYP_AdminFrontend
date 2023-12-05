@@ -6,6 +6,7 @@ import {VendorService} from "../../../../service/vendor/vendor.service";
 import {finalize} from "rxjs";
 import {IUser} from "../../../../interface/user/i-user";
 import {NzMessageService} from "ng-zorro-antd/message";
+import {NzModalService} from "ng-zorro-antd/modal";
 
 @Component({
   selector: 'user-table',
@@ -30,7 +31,8 @@ export class UserTableComponent implements OnInit {
               private fb: UntypedFormBuilder,
               private ref: ChangeDetectorRef,
               private vendorService: VendorService,
-              private message: NzMessageService) {
+              private message: NzMessageService,
+              private modal: NzModalService,) {
   }
 
   ngOnInit(): void {
@@ -159,6 +161,29 @@ export class UserTableComponent implements OnInit {
         if (resp.message) {
           this.message.success(resp.message);
           this.initUserList();
+        } else if (resp.error) {
+          this.message.error(resp.error);
+        }
+      })
+  }
+
+  conformingBlockUser(vendorId: number, username: string) {
+    this.modal.confirm({
+      nzTitle: 'Are you sure block user "' + username + '" ?',
+      nzContent: '<b style="color: red;">User will not able to use any API</b>',
+      nzOkText: 'Yes',
+      nzOkType: 'primary',
+      nzOkDanger: true,
+      nzOnOk: () => this.blockUser(vendorId),
+      nzCancelText: 'No'
+    });
+  }
+
+  blockUser(vendorId: number) {
+    this.vendorService.blockUser(vendorId)
+      .subscribe((resp) => {
+        if (resp.message) {
+          this.message.success(resp.message);
         } else if (resp.error) {
           this.message.error(resp.error);
         }

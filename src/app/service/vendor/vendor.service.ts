@@ -24,4 +24,9 @@ export class VendorService {
   sendActivationEmail(email: string): Observable<IMessage> {
     return this.vendorRestService.sendActivationEmail(email);
   }
+
+  blockUser(vendorId: number): Observable<IMessage> {
+    return this.vendorRestService.blockUser(vendorId);
+  }
+
 }

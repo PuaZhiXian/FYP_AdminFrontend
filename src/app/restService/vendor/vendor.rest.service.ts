@@ -27,5 +27,9 @@ export class VendorRestService {
     return this.httpClient.post<IMessage>(this.ProjectUrl + '/custom/sendEmail', {email}, {withCredentials: true});
   }
 
+  blockUser(vendorId: number): Observable<IMessage> {
+    return this.httpClient.post<IMessage>(this.ProjectUrl + '/custom/sendEmail', {vendorId}, {withCredentials: true});
+  }
+
 }
 
