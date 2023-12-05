@@ -21,13 +21,12 @@
            class="px-10 cursor-pointer text-header {{headerIndicator ==='notification'? 'text-[#59C3FF]':'text-white'}}">
         Notification
       </div>
-      <div (click)="redirect('profile')"
-           class="px-10 cursor-pointer  {{headerIndicator ==='profile'? 'text-[#59C3FF]':'text-white'}}">
+      <div class="px-10 cursor-pointer  {{headerIndicator ==='profile'? 'text-[#59C3FF]':'text-white'}}">
         <span class="material-icons-outlined text-md" nz-dropdown [nzDropdownMenu]="menu">person</span>
       </div>
       <nz-dropdown-menu #menu="nzDropdownMenu">
         <ul nz-menu>
-          <li>
+          <li (click)="profileModalOpen()">
             <div nz-menu-item class="cursor-pointer text-label min-w-[150px]">Profile</div>
           </li>
           <li>
@@ -37,5 +36,78 @@
       </nz-dropdown-menu>
     </div>
   </div>
-
 </div>
+
+
+<nz-modal [(nzVisible)]="profileModalVisibility" (nzOnCancel)="profileModalCancel()">
+  <div *nzModalTitle>
+    <div>{{ editingProfile ? 'Updating Profile' : 'Admin Profile'}}</div>
+  </div>
+  <div *nzModalContent>
+
+    <div *ngIf="!editingProfile">
+      <div class="grid grid-cols-12">
+        <div class="col-span-3 text-label">UserName</div>
+        <div class="col-span-9 w-full">
+          Pua Zhi Xian
+        </div>
+      </div>
+      <div class="grid grid-cols-12 my-4">
+        <div class="col-span-3 text-label">Email</div>
+        <div class="col-span-9 w-full">
+          xianpua2001@gmail.com
+        </div>
+      </div>
+    </div>
+    <div *ngIf="editingProfile">
+      <form [formGroup]="profileModalValidateForm" nz-form>
+
+        <!--Username-->
+        <div class="font-bold text-label">Enter Old Password</div>
+        <div class="">
+          <nz-form-item class="grid">
+            <nz-form-control nzErrorTip="Please input your old password!">
+              <input class="rounded bg-[#D9D9D9] text-input" formControlName="password" type="password"
+                     nz-input/>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <div class="mt-4 font-bold text-label">Enter New Password</div>
+        <div class="">
+          <nz-form-item class="grid">
+            <nz-form-control nzErrorTip="Weak Password!">
+              <input class="rounded bg-[#D9D9D9] text-input" formControlName="newPassword" type="password"
+                     nz-input/>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <div class="mt-4 font-bold text-label">Reenter New Password</div>
+        <div class="">
+          <nz-form-item class="grid">
+            <nz-form-control nzErrorTip="Password not match!">
+              <input class="rounded bg-[#D9D9D9] text-input" formControlName="rePassword" type="password"
+                     nz-input/>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div *nzModalFooter>
+    <div *ngIf="!editingProfile">
+      <button class="bg-primary-900 text-white px-[32px]rounded text-button font-bold" nz-button
+              (click)="editMode(true)">Update Profile
+      </button>
+    </div>
+    <div *ngIf="editingProfile">
+      <button class="bg-primary-900 text-white px-[32px]rounded text-button font-bold min-w-[100px]"
+              (click)="changePassword()" nz-button>Save
+      </button>
+      <button class="bg-primary-900 text-white px-[32px]rounded text-button font-bold min-w-[100px]"
+              (click)="profileModalCancel()" nz-button>Cancel
+      </button>
+    </div>
+  </div>
+</nz-modal>
