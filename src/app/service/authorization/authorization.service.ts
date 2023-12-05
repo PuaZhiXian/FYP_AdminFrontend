@@ -4,6 +4,7 @@ import {catchError, Observable, throwError} from "rxjs";
 import {ILoginRequest} from "../../interface/authorization/i-login-request";
 import {IMessage} from "../../interface/authorization/i-message";
 import {Router} from "@angular/router";
+import {ILoginResponse} from "../../interface/authorization/i-login-response";
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +15,7 @@ export class AuthorizationService {
               private authorizationRestService: AuthorizationRestService,) {
   }
 
-  login(loginRequest: ILoginRequest): Observable<IMessage> {
-    // loginRequest.password = AES.encrypt(loginRequest.password + "", environment.secretKey).toString();
+  login(loginRequest: ILoginRequest): Observable<any> {
     return this.authorizationRestService.login(loginRequest);
   }
 

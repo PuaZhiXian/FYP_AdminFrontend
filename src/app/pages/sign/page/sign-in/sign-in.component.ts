@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {NzMessageService} from "ng-zorro-antd/message";
-import { HeaderComponent } from 'src/app/pages/header/page/header/header.component';
+import {HeaderComponent} from 'src/app/pages/header/page/header/header.component';
 import {AuthorizationService} from "../../../../service/authorization/authorization.service";
 
 @Component({
@@ -45,12 +45,8 @@ export class SignInComponent implements OnInit {
     if (this.validateForm.valid) {
       this.authorizationService.login(this.validateForm.value)
         .subscribe((resp) => {
-          if (resp.message) {
-            this.router.navigate(['/', 'dashboard'])
-            this.message.success(resp.message)
-          } else if (resp.error) {
-            this.message.error(resp.error)
-          }
+          sessionStorage.setItem('jwtToken', resp.data.token);
+          sessionStorage.setItem('userInfo', JSON.stringify(resp.data.user));
         })
     } else {
       Object.values(this.validateForm.controls).forEach(control => {

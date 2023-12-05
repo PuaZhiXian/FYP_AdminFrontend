@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {environment} from "../../../environments/environment";
 import {ILoginRequest} from "../../interface/authorization/i-login-request";
 import {IMessage} from "../../interface/authorization/i-message";
+import {ILoginResponse} from "../../interface/authorization/i-login-response";
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +16,9 @@ export class AuthorizationRestService {
   constructor(private httpClient: HttpClient) {
   }
 
-  login(loginRequest: ILoginRequest): Observable<IMessage> {
-    return this.httpClient.post<IMessage>(`${this.ProjectUrl}/custom/login`, loginRequest, {withCredentials: true});
+  login(loginRequest: ILoginRequest): Observable<any> {
+    // return this.httpClient.post<IMessage>(`${this.ProjectUrl}/custom/login`, loginRequest, {withCredentials: true});
+    return this.httpClient.post<any>(`http://localhost:1337/admin/login`, loginRequest, {withCredentials: true});
   }
 
   logout(): Observable<IMessage> {
