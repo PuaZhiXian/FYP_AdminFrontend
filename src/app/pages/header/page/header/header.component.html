@@ -1,7 +1,8 @@
 <div class="container mx-auto py-5">
   <div class="flex items-center">
     <div class="">
-      <img class="h-[60px] w-auto cursor-pointer" src="assets/images/header/skyworldLogo.png" (click)="redirect('dashboard')"/>
+      <img class="h-[60px] w-auto cursor-pointer" src="assets/images/header/skyworldLogo.png"
+           (click)="redirect('dashboard')"/>
     </div>
     <div class="grow ml-5 flex justify-end items-center" *ngIf="staticLogined">
       <div (click)="redirect('dashboard')"
@@ -22,8 +23,18 @@
       </div>
       <div (click)="redirect('profile')"
            class="px-10 cursor-pointer  {{headerIndicator ==='profile'? 'text-[#59C3FF]':'text-white'}}">
-        <span class="material-icons-outlined text-md">person</span>
+        <span class="material-icons-outlined text-md" nz-dropdown [nzDropdownMenu]="menu">person</span>
       </div>
+      <nz-dropdown-menu #menu="nzDropdownMenu">
+        <ul nz-menu>
+          <li>
+            <div nz-menu-item class="cursor-pointer text-label min-w-[150px]">Profile</div>
+          </li>
+          <li>
+            <div nz-menu-item class="cursor-pointer text-label min-w-[150px]">Logout</div>
+          </li>
+        </ul>
+      </nz-dropdown-menu>
     </div>
   </div>
 
