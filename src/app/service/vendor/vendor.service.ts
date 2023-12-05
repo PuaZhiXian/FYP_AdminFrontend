@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {VendorRestService} from "../../restService/vendor/vendor.rest.service";
 import {IUser} from "../../interface/user/i-user";
+import {IMessage} from "../../interface/authorization/i-message";
 
 @Injectable({
   providedIn: 'root'
@@ -16,4 +17,7 @@ export class VendorService {
     return this.vendorRestService.getUserList();
   }
 
+  addUserSendEmail(userInformation: IUser): Observable<IMessage> {
+    return this.vendorRestService.addUserSendEmail(userInformation);
+  }
 }

@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {VendorService} from "../../../../service/vendor/vendor.service";
 import {finalize} from "rxjs";
 import {IUser} from "../../../../interface/user/i-user";
+import {NzMessageService} from "ng-zorro-antd/message";
 
 @Component({
   selector: 'user-table',
@@ -28,7 +29,8 @@ export class UserTableComponent implements OnInit {
   constructor(private router: Router,
               private fb: UntypedFormBuilder,
               private ref: ChangeDetectorRef,
-              private vendorService: VendorService) {
+              private vendorService: VendorService,
+              private message: NzMessageService) {
   }
 
   ngOnInit(): void {
@@ -134,13 +136,21 @@ export class UserTableComponent implements OnInit {
     this.addUserModalVisibility = true;
   }
 
-
   addUserModalCancel() {
     this.addUserModalVisibility = false;
   }
 
   addUserSendEmail() {
-
+    this.vendorService.addUserSendEmail(this.addUserModalValidateForm.value)
+      .subscribe((resp) => {
+        if (resp.message) {
+          this.message.success(resp.message);
+          this.addUserModalCancel()
+          this.initUserList();
+        } else if (resp.error) {
+          this.message.error(resp.error);
+        }
+      })
   }
 
 }
