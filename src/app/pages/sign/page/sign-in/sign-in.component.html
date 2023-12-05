@@ -1,0 +1,57 @@
+<div class="h-screen bg-primary-900">
+  <div class="bg-primary-900">
+    <app-header></app-header>
+  </div>
+  <div class=" bg-primary-900">
+    <div class="container mx-auto">
+      <div class="flex justify-center text-white lg:text-title">SKYWORLD ADMIN PORTAL</div>
+      <div class="mt-9 grid grid-cols-12 ">
+        <div class="lg:col-span-4 col-span-3 "></div>
+        <div class="lg:col-span-4 col-span-6 bg-[#F7FAFC] p-[48px] rounded">
+          <div>
+            <div class="text-label w-full text-[#8898aa] mb-4 text-center">Sign In</div>
+            <!--Form-->
+            <form nz-form [formGroup]="validateForm">
+              <!--Email-->
+              <div>
+                <nz-form-item>
+                  <nz-form-control nzErrorTip="Please input your email address!">
+                    <div>
+                      <input class="rounded py-[10px] px-[12px] text-[#8898aa] text-input shadow-md"
+                             formControlName="email" placeholder="Email" nz-input/>
+                    </div>
+                  </nz-form-control>
+                </nz-form-item>
+              </div>
+              <!--Password-->
+              <div>
+                <nz-form-item>
+                  <nz-form-control nzErrorTip="Please input your password!">
+                    <div>
+                      <input (keydown.enter)='submit()'
+                             class="rounded py-[10px] px-[12px] text-[#8898aa] text-input shadow-md"
+                             placeholder="Password"
+                             formControlName="password"
+                             type="password"
+                             nz-input/>
+                    </div>
+                  </nz-form-control>
+                </nz-form-item>
+              </div>
+            </form>
+
+            <!--Sign in -->
+            <div class="text-center">
+              <button class="bg-primary-900 text-white py-[10px] px-[20px] my-[24px] h-full rounded w-3/4 text-button"
+                      nz-button
+                      (click)="submit()">
+                Sign In
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="lg:col-span-4 col-span-3 "></div>
+      </div>
+    </div>
+  </div>
+</div>
