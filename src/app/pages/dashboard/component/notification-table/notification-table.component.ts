@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {INotification} from "../../../../interface/notification/i-notification";
 import {NotificationService} from "../../../../service/notification/notification.service";
 import {finalize} from "rxjs";
+import {NzModalService} from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'notification-table',
@@ -22,10 +23,13 @@ export class NotificationTableComponent implements OnInit {
   notificationList: INotification[] = [];
   filterNotificationList: INotification[] = [];
 
+  deleteNotificationModalVisibility: boolean = false;
+
   constructor(private router: Router,
               private fb: UntypedFormBuilder,
               private ref: ChangeDetectorRef,
-              private notificationService: NotificationService) {
+              private notificationService: NotificationService,
+              private modal: NzModalService) {
   }
 
   ngOnInit(): void {
@@ -43,14 +47,7 @@ export class NotificationTableComponent implements OnInit {
         this.ref.markForCheck();
       }))
       .subscribe((resp) => {
-        this.notificationList = [
-          {
-            title: 'First Notification',
-            description: 'Alert Developer Use For',
-            startDate: new Date('2001/3/5'),
-            endDate: new Date('2023/3/4')
-          }
-        ]
+        this.notificationList = resp;
         this.filterNotificationList = this.notificationList;
       })
   }
@@ -135,5 +132,26 @@ export class NotificationTableComponent implements OnInit {
   isMatch(str: string): boolean {
     return str.toLocaleLowerCase().includes(this.validateForm.value.searchKey.toLowerCase());
   }
+
+  redirectToNotificationDetail() {
+
+  }
+
+  deleteNotification() {
+
+  }
+
+  openDeleteNotificationModal() {
+    this.modal.confirm({
+      nzTitle: 'Are you sure delete this notification?',
+      nzContent: '<b style="color: red;">This action is nonundoable</b>',
+      nzOkText: 'Yes',
+      nzOkType: 'primary',
+      nzOkDanger: true,
+      nzOnOk: () => this.deleteNotification(),
+      nzCancelText: 'No'
+    });
+  }
+
 
 }

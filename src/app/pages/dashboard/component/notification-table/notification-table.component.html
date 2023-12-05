@@ -42,7 +42,19 @@
           <td class="cursor-pointer lg:text-table-row text-xs">{{ data.description }}</td>
           <td class="cursor-pointer lg:text-table-row text-xs">{{ data.startDate| date }}</td>
           <td class="cursor-pointer lg:text-table-row text-xs">{{ data.endDate| date }}</td>
-          <td class="cursor-pointer lg:text-table-row text-xs">action</td>
+          <td class="cursor-pointer lg:text-table-row text-xs">
+            <div class="flex gap-2 justify-end">
+              <button
+                class="bg-red-600 p-2 border-0 text-white rounded text-button material-icons-outlined cursor-pointer"
+                (click)="openDeleteNotificationModal()">
+                block
+              </button>
+              <button
+                class="bg-blue-600 p-2 border-0 text-white rounded text-button material-icons-outlined cursor-pointer">
+                open_in_new
+              </button>
+            </div>
+          </td>
         </tr>
         </tbody>
       </nz-table>
