@@ -16,7 +16,7 @@ export class NotificationRestService {
   }
 
   getNotificationList(): Observable<INotification[]> {
-    return this.httpClient.get<INotification[]>(this.ProjectUrl + '/custom/getVendorList', {withCredentials: true});
+    return this.httpClient.get<INotification[]>(this.ProjectUrl + '/custom/get-announcement-list', {withCredentials: true});
   }
 
 }

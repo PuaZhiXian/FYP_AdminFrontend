@@ -40,8 +40,34 @@
         <tr *ngFor="let data of filterTable.data; let i = index" class=" hover:bg-[#F5F5F5]">
           <td class="cursor-pointer lg:text-table-row text-xs">{{ data.username}}</td>
           <td class="cursor-pointer lg:text-table-row text-xs">{{ data.email }}</td>
-          <td class="cursor-pointer lg:text-table-row text-xs">{{ data.status }}</td>
-          <td class="cursor-pointer lg:text-table-row text-xs">action</td>
+          <td class="cursor-pointer lg:text-table-row text-xs">
+            <div *ngIf="data.status === 'Approved'"
+                 class="justify-center text-xs inline-flex font-bold px-3 py-1 bg-green-200 text-green-700 rounded-full min-w-[80px]">
+              APPROVED
+            </div>
+            <div *ngIf="data.status === 'Pending'"
+                 class="justify-center text-xs inline-flex font-bold px-3 py-1 bg-orange-200 text-orange-700 rounded-full min-w-[80px]">
+              PENDING
+            </div>
+            <div *ngIf="data.status === 'Rejected'"
+                 class="justify-center text-xs inline-flex font-bold px-3 py-1 bg-red-200 text-red-700 rounded-full min-w-[80px]">
+              REJECTED
+            </div>
+          </td>
+          <td class="cursor-pointer lg:text-table-row text-xs">
+            <div class="flex gap-2 justify-end">
+              <button *ngIf="data.status ==='Pending'"
+                      class="bg-green-600 p-2 border-0 text-white rounded text-button material-icons-outlined ">
+                forward_to_inbox
+              </button>
+              <button class="bg-red-600 p-2 border-0 text-white rounded text-button material-icons-outlined ">
+                block
+              </button>
+              <button class="bg-blue-600 p-2 border-0 text-white rounded text-button material-icons-outlined ">
+                open_in_new
+              </button>
+            </div>
+          </td>
         </tr>
         </tbody>
       </nz-table>

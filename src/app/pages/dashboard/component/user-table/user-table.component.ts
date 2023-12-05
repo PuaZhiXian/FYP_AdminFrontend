@@ -91,7 +91,7 @@ export class UserTableComponent implements OnInit {
         filterMultiple: false,
         listOfFilter: [],
         filterFn: null,
-        width: '80px'
+        width: '150px'
       }
     ];
   }
