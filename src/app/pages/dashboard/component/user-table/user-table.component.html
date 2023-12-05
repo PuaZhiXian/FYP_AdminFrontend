@@ -63,10 +63,10 @@
   </div>
   <div *nzModalContent>
     <form nz-form [formGroup]="addUserModalValidateForm">
-      <div class="flex items-center">
-        <div class="text-label my-2">Email</div>
-        <div class="w-full">
-          <nz-form-item class="my-0 mx-4">
+      <div class="grid grid-cols-12">
+        <div class="col-span-3 text-label my-2">Email</div>
+        <div class="col-span-9 w-full">
+          <nz-form-item class="my-0">
             <nz-form-control nzErrorTip="Please input your email address!">
               <div>
                 <input class="rounded py-[10px] px-[12px] text-[#8898aa] text-input shadow-md"
@@ -75,8 +75,21 @@
             </nz-form-control>
           </nz-form-item>
         </div>
-
       </div>
+      <div class="grid grid-cols-12 my-2">
+        <div class="col-span-3 text-label my-2">Organisation</div>
+        <div class="col-span-9 w-full">
+          <nz-form-item class="my-0">
+            <nz-form-control nzErrorTip="Please input your organisation!">
+              <div>
+                <input class="rounded py-[10px] px-[12px] text-[#8898aa] text-input shadow-md"
+                       formControlName="organisation" placeholder="Organisation" nz-input/>
+              </div>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </div>
+
     </form>
   </div>
   <div *nzModalFooter>

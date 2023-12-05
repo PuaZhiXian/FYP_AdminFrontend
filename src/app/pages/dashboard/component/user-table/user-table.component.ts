@@ -104,7 +104,8 @@ export class UserTableComponent implements OnInit {
 
   initAddUserModalForm() {
     this.addUserModalValidateForm = this.fb.group({
-      email: [null, [Validators.required, Validators.email]]
+      email: [null, [Validators.required, Validators.email]],
+      organisation: [null, [Validators.required]]
     });
   }
 
