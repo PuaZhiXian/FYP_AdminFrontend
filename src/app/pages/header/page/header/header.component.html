@@ -8,13 +8,17 @@
            class="px-10 cursor-pointer text-header {{headerIndicator ==='dashboard'? 'text-[#59C3FF]':'text-white'}}">
         Dashboard
       </div>
-      <div (click)="redirect('product')"
-           class="px-10 cursor-pointer text-header {{headerIndicator ==='product'? 'text-[#59C3FF]':'text-white'}}">
-        Product
+      <div (click)="redirect('api')"
+           class="px-10 cursor-pointer text-header {{headerIndicator ==='api'? 'text-[#59C3FF]':'text-white'}}">
+        API Collection
       </div>
-      <div (click)="redirect('guide')"
-           class="px-10 cursor-pointer text-header {{headerIndicator ==='guide'? 'text-[#59C3FF]':'text-white'}}">
-        Guide
+      <div (click)="redirect('user')"
+           class="px-10 cursor-pointer text-header {{headerIndicator ==='user'? 'text-[#59C3FF]':'text-white'}}">
+        User
+      </div>
+      <div (click)="redirect('notification')"
+           class="px-10 cursor-pointer text-header {{headerIndicator ==='notification'? 'text-[#59C3FF]':'text-white'}}">
+        Notification
       </div>
       <div (click)="redirect('profile')"
            class="px-10 cursor-pointer  {{headerIndicator ==='profile'? 'text-[#59C3FF]':'text-white'}}">

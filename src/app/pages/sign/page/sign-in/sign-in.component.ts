@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {NzMessageService} from "ng-zorro-antd/message";
+import { HeaderComponent } from 'src/app/pages/header/page/header/header.component';
 import {AuthorizationService} from "../../../../service/authorization/authorization.service";
 
 @Component({
@@ -26,6 +27,7 @@ export class SignInComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
+    HeaderComponent.logined = false;
   }
 
   initForm() {
