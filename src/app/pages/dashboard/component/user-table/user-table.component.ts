@@ -29,13 +29,13 @@ export class UserTableComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.initProject();
+    this.initUserList();
     this.initTable();
     this.initForm();
     this.changeHandler();
   }
 
-  initProject() {
+  initUserList() {
     this.vendorService.getUserList()
       .pipe(finalize(() => {
         this.loadingTable = false;
