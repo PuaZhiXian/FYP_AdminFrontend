@@ -28,8 +28,12 @@ export class VendorRestService {
   }
 
   blockUser(vendorId: number): Observable<IMessage> {
-    return this.httpClient.post<IMessage>(this.ProjectUrl + '/custom/sendEmail', {vendorId}, {withCredentials: true});
+    return this.httpClient.post<IMessage>(this.ProjectUrl + '/custom/block-vendor', {id: vendorId}, {withCredentials: true});
   }
 
+  unblockUser(vendorId: number): Observable<IMessage> {
+    return this.httpClient.post<IMessage>(this.ProjectUrl + '/custom/unblock-vendor', {id: vendorId}, {withCredentials: true});
+  }
 }
+
 

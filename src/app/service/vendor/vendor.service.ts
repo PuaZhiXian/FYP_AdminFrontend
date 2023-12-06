@@ -29,4 +29,10 @@ export class VendorService {
     return this.vendorRestService.blockUser(vendorId);
   }
 
+  unblockUser(vendorId: number): Observable<IMessage> {
+    return this.vendorRestService.unblockUser(vendorId);
+  }
+
+
+
 }

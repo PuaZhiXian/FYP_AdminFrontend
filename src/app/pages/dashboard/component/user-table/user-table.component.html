@@ -67,7 +67,7 @@
                       class="bg-red-600 p-2 border-0 text-white rounded text-button material-icons-outlined cursor-pointer">
                 lock
               </button>
-              <button *ngIf="data.status ==='Rejected'" nz-tooltip
+              <button *ngIf="data.status ==='Rejected'" nz-tooltip (click)="unblockUser(data.id)"
                       nzTooltipTitle="unblock" nzTooltipPlacement="left" [nzTooltipMouseEnterDelay]="0.75"
                       class="bg-green-600 p-2 border-0 text-white rounded text-button material-icons-outlined cursor-pointer">
                 lock_open

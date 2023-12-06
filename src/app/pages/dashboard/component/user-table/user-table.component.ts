@@ -184,11 +184,22 @@ export class UserTableComponent implements OnInit {
       .subscribe((resp) => {
         if (resp.message) {
           this.message.success(resp.message);
+          this.initUserList();
         } else if (resp.error) {
           this.message.error(resp.error);
         }
       })
   }
 
-
+  unblockUser(vendorId: number) {
+    this.vendorService.unblockUser(vendorId)
+      .subscribe((resp) => {
+        if (resp.message) {
+          this.message.success(resp.message);
+          this.initUserList();
+        } else if (resp.error) {
+          this.message.error(resp.error);
+        }
+      })
+  }
 }
