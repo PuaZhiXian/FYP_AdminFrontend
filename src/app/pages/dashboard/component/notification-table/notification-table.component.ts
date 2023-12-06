@@ -6,6 +6,7 @@ import {INotification} from "../../../../interface/notification/i-notification";
 import {NotificationService} from "../../../../service/notification/notification.service";
 import {finalize} from "rxjs";
 import {NzModalService} from 'ng-zorro-antd/modal';
+import {NzMessageService} from "ng-zorro-antd/message";
 
 @Component({
   selector: 'notification-table',
@@ -29,7 +30,8 @@ export class NotificationTableComponent implements OnInit {
               private fb: UntypedFormBuilder,
               private ref: ChangeDetectorRef,
               private notificationService: NotificationService,
-              private modal: NzModalService) {
+              private modal: NzModalService,
+              private message:NzMessageService) {
   }
 
   ngOnInit(): void {
@@ -137,18 +139,26 @@ export class NotificationTableComponent implements OnInit {
 
   }
 
-  deleteNotification() {
-
+  deleteNotification(notificationId: number) {
+    this.notificationService.deleteNotification(notificationId)
+      .subscribe((resp) => {
+        if(resp.message){
+          this.message.success(resp.message);
+          this.initNotification();
+        }else if(resp.error){
+          this.message.error(resp.error);
+        }
+      })
   }
 
-  openDeleteNotificationModal() {
+  openDeleteNotificationModal(notificationId: number) {
     this.modal.confirm({
       nzTitle: 'Are you sure delete this notification?',
       nzContent: '<b style="color: red;">This action is nonundoable</b>',
       nzOkText: 'Yes',
       nzOkType: 'primary',
       nzOkDanger: true,
-      nzOnOk: () => this.deleteNotification(),
+      nzOnOk: () => this.deleteNotification(notificationId),
       nzCancelText: 'No'
     });
   }
