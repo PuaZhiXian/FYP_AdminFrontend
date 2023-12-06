@@ -8,6 +8,7 @@ const routes: Routes = [
   {path: 'sign', loadChildren: () => import('./pages/sign/sign.module').then(m => m.SignModule)},
   {path: 'user', loadChildren: () => import('./pages/user/user.module').then(m => m.UserModule)},
   {path: 'notification', loadChildren: () => import('./pages/notification/notification.module').then(m => m.NotificationModule)},
+  {path: 'api-collection', loadChildren: () => import('./pages/api-collection/api-collection.module').then(m => m.ApiCollectionModule)},
 ];
 
 @NgModule({
