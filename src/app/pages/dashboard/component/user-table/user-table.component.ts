@@ -58,7 +58,7 @@ export class UserTableComponent implements OnInit {
   initTable() {
     this.listOfColumns = [
       {
-        name: 'UserName',
+        name: 'Username',
         sortOrder: null,
         sortFn: null,
         sortDirections: ['ascend', 'descend', null],
