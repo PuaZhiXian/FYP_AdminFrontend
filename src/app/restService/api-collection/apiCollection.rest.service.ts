@@ -5,6 +5,7 @@ import {environment} from "../../../environments/environment";
 import {INotification} from "../../interface/notification/i-notification";
 import {IMessage} from "../../interface/authorization/i-message";
 import {IApiCollection} from "../../interface/api-collection/i-api-collection";
+import {IApiCategory} from "../../interface/api-collection/i-api-category";
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +17,8 @@ export class ApiCollectionRestService {
   constructor(private httpClient: HttpClient) {
   }
 
-  getAPICollectionList(): Observable<IApiCollection[]> {
-    return this.httpClient.get<IApiCollection[]>(this.ProjectUrl + '/custom/get-all-api-collection', {withCredentials: true});
+  getAPICategoryList(): Observable<IApiCategory[]> {
+    return this.httpClient.get<IApiCategory[]>(this.ProjectUrl + '/custom/get-all-api-category', {withCredentials: true});
   }
 
 }

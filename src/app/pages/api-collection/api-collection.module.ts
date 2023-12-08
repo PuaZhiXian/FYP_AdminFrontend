@@ -17,9 +17,10 @@ import { ApiCollectionComponent } from './page/api-collection/api-collection.com
 import {NzTagModule} from "ng-zorro-antd/tag";
 import {NzDividerModule} from "ng-zorro-antd/divider";
 import {NzUploadModule} from "ng-zorro-antd/upload";
+import {NzAvatarModule} from "ng-zorro-antd/avatar";
 
 @NgModule({
-    imports: [ApiCollectionRoutingModule, HeaderModule, NzButtonModule, NzFormModule, ReactiveFormsModule, NzInputModule, NzTableModule, CommonModule, NzSkeletonModule, NzModalModule, NzCardModule, NzMessageModule, NzToolTipModule, NzTagModule, NzDividerModule, NzUploadModule],
+    imports: [ApiCollectionRoutingModule, HeaderModule, NzButtonModule, NzFormModule, ReactiveFormsModule, NzInputModule, NzTableModule, CommonModule, NzSkeletonModule, NzModalModule, NzCardModule, NzMessageModule, NzToolTipModule, NzTagModule, NzDividerModule, NzUploadModule, NzAvatarModule],
   declarations: [ApiCollectionComponent],
   exports: [ApiCollectionComponent]
 })

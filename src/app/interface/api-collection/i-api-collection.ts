@@ -3,5 +3,6 @@ export interface IApiCollection {
   api_collection_name: string,
   createdAt: Date,
   count: number,
-  api_category_name: string
+  api_category_name: string,
+  short_description: string,
 }
