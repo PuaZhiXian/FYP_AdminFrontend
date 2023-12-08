@@ -22,9 +22,18 @@
         <div class="text-docs-title">
           Filter By
         </div>
-        <div *ngFor="let category of apiCategoryList">
-
+        <div *ngFor="let category of apiCategoryList" class="flex gap-1">
+          <button *ngIf="filterCategory.indexOf(category.id) !== -1" nz-button nzType="primary"
+                  nzShape="round" (click)="removeFilter(category.id)">
+            <div class="flex items-center gap-1">
+              <div class="text-sm material-icons-outlined">close</div>
+              <div class="text-sm">{{category.category_name}}</div>
+            </div>
+          </button>
+          <button *ngIf="filterCategory.indexOf(category.id) === -1" nz-button nzShape="round"
+                  (click)="addFilter(category.id)" class="text-sm">{{category.category_name}}</button>
         </div>
+
       </div>
     </div>
     <div *ngFor="let category of filteredApiCategoryList; let j = index">

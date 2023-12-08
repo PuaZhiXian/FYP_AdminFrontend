@@ -4,7 +4,7 @@ import {ApiCollectionRoutingModule} from './api-collection-routing.module';
 import {HeaderModule} from "../header/header.module";
 import {NzButtonModule} from "ng-zorro-antd/button";
 import {NzFormModule} from "ng-zorro-antd/form";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NzInputModule} from "ng-zorro-antd/input";
 import {NzTableModule} from "ng-zorro-antd/table";
 import {CommonModule} from "@angular/common";
@@ -18,9 +18,10 @@ import {NzTagModule} from "ng-zorro-antd/tag";
 import {NzDividerModule} from "ng-zorro-antd/divider";
 import {NzUploadModule} from "ng-zorro-antd/upload";
 import {NzAvatarModule} from "ng-zorro-antd/avatar";
+import {NzCheckboxModule} from "ng-zorro-antd/checkbox";
 
 @NgModule({
-    imports: [ApiCollectionRoutingModule, HeaderModule, NzButtonModule, NzFormModule, ReactiveFormsModule, NzInputModule, NzTableModule, CommonModule, NzSkeletonModule, NzModalModule, NzCardModule, NzMessageModule, NzToolTipModule, NzTagModule, NzDividerModule, NzUploadModule, NzAvatarModule],
+  imports: [ApiCollectionRoutingModule, HeaderModule, NzButtonModule, NzFormModule, ReactiveFormsModule, NzInputModule, NzTableModule, CommonModule, NzSkeletonModule, NzModalModule, NzCardModule, NzMessageModule, NzToolTipModule, NzTagModule, NzDividerModule, NzUploadModule, NzAvatarModule, NzCheckboxModule, FormsModule],
   declarations: [ApiCollectionComponent],
   exports: [ApiCollectionComponent]
 })
