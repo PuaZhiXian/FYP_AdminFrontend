@@ -20,7 +20,6 @@ export class ApiCollectionComponent implements OnInit {
   validateForm!: UntypedFormGroup;
   apiCategoryList: IApiCategory[] = [];
   filteredApiCategoryList: IApiCategory[] = [];
-  numberOfApiCollection: number = 0;
   randomColorsArray: string[] = [
     'bg-red-500',
     'bg-orange-500',
@@ -82,7 +81,6 @@ export class ApiCollectionComponent implements OnInit {
       .subscribe((resp) => {
         this.apiCategoryList = resp;
         this.filteredApiCategoryList = resp;
-        this.numberOfApiCollection = this.filteredApiCategoryList.length;
       })
   }
 
@@ -101,7 +99,6 @@ export class ApiCollectionComponent implements OnInit {
   searching() {
     if (!this.validateForm.value.searchKey || this.validateForm.value.searchKey.length == 0) {
       this.filteredApiCategoryList = this.apiCategoryList;
-      this.numberOfApiCollection = this.filteredApiCategoryList.length;
     } else {
       this.filteredApiCategoryList = [];
       this.apiCategoryList.forEach(items => {
@@ -109,11 +106,14 @@ export class ApiCollectionComponent implements OnInit {
         temp.api_collections = items.api_collections.filter((api) => {
           return this.isMatch(api.api_collection_name);
         })
-        if (this.filterCategory.indexOf(items.id) !== -1) {
-          this.filteredApiCategoryList.push(temp);
-        }
+        this.filteredApiCategoryList.push(temp);
       })
-      this.numberOfApiCollection = this.filteredApiCategoryList.length;
+    }
+
+    if (this.filterCategory.length > 0) {
+      this.filteredApiCategoryList =  this.filteredApiCategoryList.filter((items)=>{
+        return this.filterCategory.indexOf(items.id) !== -1;
+      })
     }
   }
 
@@ -128,12 +128,14 @@ export class ApiCollectionComponent implements OnInit {
   addFilter(categoryId: number) {
     this.filterCategory.push(categoryId);
     console.log(this.filterCategory);
+    this.searching();
   }
 
   removeFilter(categoryId: number) {
     this.filterCategory = this.filterCategory.filter((item) => {
       return item !== categoryId;
     })
+    this.searching();
 
     console.log(this.filterCategory);
 
