@@ -19,6 +19,7 @@ export class ApiCollectionComponent implements OnInit {
 
   validateForm!: UntypedFormGroup;
   createNewCategoryForm!: UntypedFormGroup;
+  createNewCollectionForm!: UntypedFormGroup;
   apiCategoryList: IApiCategory[] = [];
   filteredApiCategoryList: IApiCategory[] = [];
   randomColorsArray: string[] = [
@@ -39,6 +40,7 @@ export class ApiCollectionComponent implements OnInit {
     'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGcgY2xpcC1wYXRoPSJ1cmwoI2NsaXAwXzE2MDFfODgzMykiPgo8cGF0aCBkPSJNMjQgNDhDMzcuMjU0OCA0OCA0OCAzNy4yNTQ4IDQ4IDI0QzQ4IDEwLjc0NTIgMzcuMjU0OCAwIDI0IDBDMTAuNzQ1MiAwIDAgMTAuNzQ1MiAwIDI0QzAgMzcuMjU0OCAxMC43NDUyIDQ4IDI0IDQ4WiIgZmlsbD0iI0U4RjVGRSIvPgo8cGF0aCBkPSJNMzYuNTE5IDMzLjUyNDlIMjQuNjgxQzI0LjQ4NjYgMzMuNTI0NyAyNC4yOTQ4IDMzLjQ4MDMgMjQuMTIgMzMuMzk1QzIzLjk0NTMgMzMuMzA5NyAyMy43OTI0IDMzLjE4NTcgMjMuNjcyNyAzMy4wMzI1QzIzLjU1MyAzMi44NzkzIDIzLjQ2OTcgMzIuNzAwOCAyMy40MjkzIDMyLjUxMDdDMjMuMzg4OCAzMi4zMjA1IDIzLjM5MjEgMzIuMTIzNiAyMy40MzkgMzEuOTM0OUwyNC4yMTkgMjguNzk5OUMyNC41MDQgMjcuNjgzMiAyNS4xNTMxIDI2LjY5MzQgMjYuMDYzNyAyNS45ODcxQzI2Ljk3NDQgMjUuMjgwNyAyOC4wOTQ1IDI0Ljg5ODIgMjkuMjQ3IDI0Ljg5OTlIMzEuOTQ3QzMzLjEwMDUgMjQuODk2OCAzNC4yMjIxIDI1LjI3ODggMzUuMTMzOSAyNS45ODUyQzM2LjA0NTggMjYuNjkxNyAzNi42OTU4IDI3LjY4MjIgMzYuOTgxIDI4Ljc5OTlMMzcuNzYxIDMxLjkyMjlDMzcuODEwMSAzMi4xMTI0IDM3LjgxNSAzMi4zMTA2IDM3Ljc3NTYgMzIuNTAyM0MzNy43MzYxIDMyLjY5NCAzNy42NTMyIDMyLjg3NDEgMzcuNTMzMyAzMy4wMjg4QzM3LjQxMzMgMzMuMTgzNSAzNy4yNTk2IDMzLjMwODYgMzcuMDgzNyAzMy4zOTQ2QzM2LjkwNzkgMzMuNDgwNiAzNi43MTQ3IDMzLjUyNTIgMzYuNTE5IDMzLjUyNDlaIiBmaWxsPSIjMDAyRjZDIi8+CjxwYXRoIGQ9Ik0zMy44NCAxOS4yNTQxQzMzLjg0IDIxLjQwMjEgMzIuMzg4IDIzLjM3NjEgMzAuNiAyMy4zNzYxQzI4LjgxMiAyMy4zNzYxIDI3LjM2IDIxLjQwMjEgMjcuMzYgMTkuMjU0MUMyNy4zNiAxNy4xMDYxIDI4LjggMTUuNjAwMSAzMC42IDE1LjYwMDFDMzIuNCAxNS42MDAxIDMzLjg0IDE3LjEwMDEgMzMuODQgMTkuMjU0MVoiIGZpbGw9IiMwMDJGNkMiLz4KPHBhdGggZD0iTTQwLjggMzEuMkg3LjIwMDAxVjMzLjZINDAuOFYzMS4yWiIgZmlsbD0iIzhCQkU0QiIvPgo8cGF0aCBkPSJNMjQuODE2IDMzLjU5OTlIMTIuNTU4QzEyLjIzODggMzMuNTk5OSAxMS45MjM4IDMzLjUyNzIgMTEuNjM3IDMzLjM4NzJDMTEuMzUwMiAzMy4yNDcxIDExLjA5OSAzMy4wNDM2IDEwLjkwMjYgMzIuNzkyQzEwLjcwNjMgMzIuNTQwNCAxMC41Njk4IDMyLjI0NzMgMTAuNTAzNyAzMS45MzVDMTAuNDM3NiAzMS42MjI4IDEwLjQ0MzUgMzEuMjk5NiAxMC41MjEgMzAuOTg5OUwxMS4yNDQgMjguMTAwOUMxMS41NzA4IDI2Ljc5NDYgMTIuMzI0NCAyNS42MzQ5IDEzLjM4NTIgMjQuODA1NUMxNC40NDYxIDIzLjk3NjIgMTUuNzUzNCAyMy41MjQ4IDE3LjEgMjMuNTIyOUgyMC4yNjVDMjEuNjEzNSAyMy41MjI2IDIyLjkyMzQgMjMuOTczIDIzLjk4NjYgMjQuODAyNUMyNS4wNDk4IDI1LjYzMTkgMjUuODA1MiAyNi43OTI5IDI2LjEzMyAyOC4xMDA5TDI2Ljg1MyAzMC45ODk5QzI2LjkzMDUgMzEuMjk5NiAyNi45MzY0IDMxLjYyMjggMjYuODcwMyAzMS45MzVDMjYuODA0MiAzMi4yNDczIDI2LjY2NzcgMzIuNTQwNCAyNi40NzE0IDMyLjc5MkMyNi4yNzUgMzMuMDQzNiAyNi4wMjM4IDMzLjI0NzEgMjUuNzM3IDMzLjM4NzJDMjUuNDUwMiAzMy41MjcyIDI1LjEzNTIgMzMuNTk5OSAyNC44MTYgMzMuNTk5OVoiIGZpbGw9IiMwMDkxREEiLz4KPHBhdGggZD0iTTI2Ljg1MyAzMC45OUwyNi4xMzMgMjguMTAxQzI1Ljk5MDUgMjcuNTM5MiAyNS43NjgyIDI3LjAwMDcgMjUuNDczIDI2LjUwMkwxOC4zNzIgMzMuNkgyNC44MTZDMjUuMTM1MiAzMy41OTk5IDI1LjQ1MDIgMzMuNTI3MiAyNS43MzcgMzMuMzg3MkMyNi4wMjM4IDMzLjI0NzIgMjYuMjc1IDMzLjA0MzYgMjYuNDcxNCAzMi43OTJDMjYuNjY3NyAzMi41NDA0IDI2LjgwNDIgMzIuMjQ3MyAyNi44NzAzIDMxLjkzNTFDMjYuOTM2NCAzMS42MjI4IDI2LjkzMDUgMzEuMjk5NiAyNi44NTMgMzAuOTlaIiBmaWxsPSIjMDA1RUI4Ii8+CjxwYXRoIGQ9Ik0yMi40NjcgMTYuOTVDMjIuNDY3IDE5LjQ1NSAyMC43NzUgMjEuNzUgMTguNjg3IDIxLjc1QzE2LjU5OSAyMS43NSAxNC45MSAxOS40NTUgMTQuOTEgMTYuOTVDMTQuOTEgMTQuNDQ1IDE2LjYwMiAxMi42ODcgMTguNjg3IDEyLjY4N0MyMC43NzIgMTIuNjg3IDIyLjQ2NyAxNC40NDUgMjIuNDY3IDE2Ljk1WiIgZmlsbD0iIzAwOTFEQSIvPgo8L2c+CjxkZWZzPgo8Y2xpcFBhdGggaWQ9ImNsaXAwXzE2MDFfODgzMyI+CjxyZWN0IHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgZmlsbD0id2hpdGUiLz4KPC9jbGlwUGF0aD4KPC9kZWZzPgo8L3N2Zz4K',
   ];
   createNewCategoryModalVisibility: boolean = false;
+  createNewCollectionModalVisibility: boolean = false;
 
   filterCategory: number[] = [];
   loading: boolean = true;
@@ -98,6 +100,15 @@ export class ApiCollectionComponent implements OnInit {
     });
   }
 
+  initCreateNewCollectionForm() {
+    this.createNewCollectionForm = this.fb.group({
+      api_collection_name: [null, [Validators.required]],
+      short_description: [null, [Validators.required]],
+      long_description: [null, [Validators.required]],
+      api_category_id: [null, [Validators.required]],
+    });
+  }
+
   changeHandler() {
     this.validateForm.valueChanges.subscribe((value => {
       this.searching();
@@ -129,13 +140,8 @@ export class ApiCollectionComponent implements OnInit {
     return str.toLocaleLowerCase().includes(this.validateForm.value.searchKey.toLowerCase());
   }
 
-  log($event: any) {
-    console.log($event)
-  }
-
   addFilter(categoryId: number) {
     this.filterCategory.push(categoryId);
-    console.log(this.filterCategory);
     this.searching();
   }
 
@@ -168,6 +174,37 @@ export class ApiCollectionComponent implements OnInit {
         })
     } else {
       Object.values(this.createNewCategoryForm.controls).forEach(control => {
+        if (control.invalid) {
+          control.markAsDirty();
+          control.updateValueAndValidity({onlySelf: true});
+        }
+      });
+    }
+  }
+
+  openCreateNewCollectionModal(id: number) {
+    this.initCreateNewCollectionForm();
+    this.createNewCollectionForm.patchValue({api_category_id: id})
+    this.createNewCollectionModalVisibility = true;
+  }
+
+  closeCreateNewCollectionModal() {
+    this.createNewCollectionModalVisibility = false;
+  }
+
+  createNewCollection() {
+    if (this.createNewCollectionForm.valid) {
+      this.apiCollectionService.createNewApiCollection(this.createNewCollectionForm.value)
+        .subscribe((resp) => {
+          if (resp.message) {
+            this.message.success(resp.message);
+            this.closeCreateNewCollectionModal();
+          } else {
+            this.message.error(resp.error || '');
+          }
+        })
+    } else {
+      Object.values(this.createNewCollectionForm.controls).forEach(control => {
         if (control.invalid) {
           control.markAsDirty();
           control.updateValueAndValidity({onlySelf: true});

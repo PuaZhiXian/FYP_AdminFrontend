@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {environment} from "../../../environments/environment";
 import {IMessage} from "../../interface/authorization/i-message";
 import {IApiCategory} from "../../interface/api-collection/i-api-category";
+import {IApiCollection} from "../../interface/api-collection/i-api-collection";
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,10 @@ export class ApiCollectionRestService {
 
   createNewApiCategory(apiCategoryDetail: IApiCategory): Observable<IMessage> {
     return this.httpClient.post<IMessage>(this.ProjectUrl + '/custom/create-api-category', apiCategoryDetail,{withCredentials: true});
+  }
+
+  createNewApiCollection(apiCollectionDetail: IApiCollection): Observable<IMessage> {
+    return this.httpClient.post<IMessage>(this.ProjectUrl + '/custom/create-api-collection', apiCollectionDetail,{withCredentials: true});
   }
 
 

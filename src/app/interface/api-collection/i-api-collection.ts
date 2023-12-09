@@ -4,5 +4,7 @@ export interface IApiCollection {
   createdAt: Date,
   count: number,
   api_category_name: string,
+  api_category_id: number
   short_description: string,
+  long_description: string,
 }
