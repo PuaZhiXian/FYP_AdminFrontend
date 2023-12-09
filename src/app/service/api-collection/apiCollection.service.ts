@@ -1,9 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
-import {INotification} from "../../interface/notification/i-notification";
 import {IMessage} from "../../interface/authorization/i-message";
 import {ApiCollectionRestService} from "../../restService/api-collection/apiCollection.rest.service";
-import {IApiCollection} from "../../interface/api-collection/i-api-collection";
 import {IApiCategory} from "../../interface/api-collection/i-api-category";
 
 @Injectable({
@@ -17,6 +15,10 @@ export class ApiCollectionService {
 
   getAPICategoryList(): Observable<IApiCategory[]> {
     return this.vendorRestService.getAPICategoryList();
+  }
+
+  createNewApiCategory(apiCategoryDetail: IApiCategory): Observable<IMessage> {
+    return this.vendorRestService.createNewApiCategory(apiCategoryDetail);
   }
 
 }

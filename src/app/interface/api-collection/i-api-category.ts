@@ -5,6 +5,5 @@ export interface IApiCategory {
   isActive: boolean,
   category_name: string,
   image_url: string,
-  short_description: string,
   api_collections: IApiCollection[],
 }

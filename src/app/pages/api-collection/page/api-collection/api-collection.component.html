@@ -22,16 +22,26 @@
         <div class="text-docs-title">
           Filter By
         </div>
-        <div *ngFor="let category of apiCategoryList" class="flex gap-1">
-          <button *ngIf="filterCategory.indexOf(category.id) !== -1" nz-button nzType="primary"
-                  nzShape="round" (click)="removeFilter(category.id)">
+        <div class="grow flex gap-4">
+          <div *ngFor="let category of apiCategoryList" class="flex gap-1">
+            <button *ngIf="filterCategory.indexOf(category.id) !== -1 && category.api_collections.length > 0" nz-button nzType="primary"
+                    nzShape="round" (click)="removeFilter(category.id)">
+              <div class="flex items-center gap-1">
+                <div class="text-sm material-icons-outlined">close</div>
+                <div class="text-sm">{{category.category_name}}</div>
+              </div>
+            </button>
+            <button *ngIf="filterCategory.indexOf(category.id) === -1 && category.api_collections.length > 0" nz-button nzShape="round"
+                    (click)="addFilter(category.id)" class="text-sm">{{category.category_name}}</button>
+          </div>
+        </div>
+
+        <div>
+          <button nz-button nzType="primary" class="rounded" (click)="openCreateNewCategoryModal()">
             <div class="flex items-center gap-1">
-              <div class="text-sm material-icons-outlined">close</div>
-              <div class="text-sm">{{category.category_name}}</div>
+              <div class="text-sm">Create New Category</div>
             </div>
           </button>
-          <button *ngIf="filterCategory.indexOf(category.id) === -1" nz-button nzShape="round"
-                  (click)="addFilter(category.id)" class="text-sm">{{category.category_name}}</button>
         </div>
 
       </div>
@@ -92,6 +102,7 @@
 
   </div>
 </div>
+
 <ng-template #prefixIcon>
   <span class=" text-[#52606D] material-icons-outlined text-input">search</span>
 </ng-template>
@@ -99,4 +110,48 @@
 <ng-template #loadingTpl>
   <nz-skeleton></nz-skeleton>
 </ng-template>
+
+<nz-modal [(nzVisible)]="createNewCategoryModalVisibility" (nzOnCancel)="closeCreateNewCategoryModal()">
+  <div *nzModalTitle>
+    <div>Create New Category</div>
+  </div>
+  <div *nzModalContent>
+    <div>
+      <form [formGroup]="createNewCategoryForm" nz-form>
+
+        <!--Category Name-->
+        <div class="font-bold text-label">Category Name</div>
+        <div class="">
+          <nz-form-item class="grid">
+            <nz-form-control nzErrorTip="Please input category Name!">
+              <input class="rounded bg-[#D9D9D9] text-input" formControlName="category_name"
+                     nz-input/>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <!--Img Url-->
+        <div class="mt-4 font-bold text-label">Img Url</div>
+        <div class="">
+          <nz-form-item class="grid">
+            <nz-form-control nzErrorTip="Please input Image Url!">
+              <input class="rounded bg-[#D9D9D9] text-input" formControlName="image_url"
+                     nz-input/>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+      </form>
+    </div>
+  </div>
+  <div *nzModalFooter>
+    <div>
+      <button class="bg-primary-900 text-white px-[32px]rounded text-button font-bold min-w-[100px]"
+              (click)="createNewApiCategory()" nz-button>Create
+      </button>
+      <button class="bg-primary-900 text-white px-[32px]rounded text-button font-bold min-w-[100px]"
+              (click)="closeCreateNewCategoryModal()" nz-button>Cancel
+      </button>
+    </div>
+  </div>
+</nz-modal>
 
