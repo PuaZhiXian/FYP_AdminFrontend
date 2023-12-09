@@ -58,7 +58,7 @@ export class ApiCollectionComponent implements OnInit {
   ngOnInit(): void {
     HeaderComponent.headerIndicator = 'api';
     this.initForm();
-    this.initApiCollectionList();
+    this.initApiCategoryList();
     this.changeHandler();
   }
 
@@ -74,7 +74,7 @@ export class ApiCollectionComponent implements OnInit {
     }
   }
 
-  initApiCollectionList() {
+  initApiCategoryList() {
     this.apiCollectionService.getAPICategoryList()
       .pipe(finalize(() => {
         this.loading = false;
@@ -199,6 +199,7 @@ export class ApiCollectionComponent implements OnInit {
           if (resp.message) {
             this.message.success(resp.message);
             this.closeCreateNewCollectionModal();
+            this.initApiCategoryList();
           } else {
             this.message.error(resp.error || '');
           }
