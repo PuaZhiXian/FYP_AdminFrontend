@@ -6,4 +6,5 @@ export interface IApiCategory {
   category_name: string,
   image_url: string,
   api_collections: IApiCollection[],
+  active: boolean,
 }

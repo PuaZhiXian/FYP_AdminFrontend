@@ -9,11 +9,17 @@ import {NzSelectModule} from "ng-zorro-antd/select";
 import {FormsModule} from "@angular/forms";
 import {NzMessageModule} from "ng-zorro-antd/message";
 import {DashboardModule} from "../dashboard/dashboard.module";
+import { UserDetailComponent } from './page/user-detail/user-detail.component';
+import {NzDividerModule} from "ng-zorro-antd/divider";
+import {NzTabsModule} from "ng-zorro-antd/tabs";
+import {NzAvatarModule} from "ng-zorro-antd/avatar";
+import {NzCollapseModule} from "ng-zorro-antd/collapse";
 
 
 @NgModule({
   declarations: [
-    UserComponent
+    UserComponent,
+    UserDetailComponent
   ],
   exports: [
     UserComponent
@@ -28,6 +34,10 @@ import {DashboardModule} from "../dashboard/dashboard.module";
     NzSelectModule,
     FormsModule,
     DashboardModule,
+    NzDividerModule,
+    NzTabsModule,
+    NzAvatarModule,
+    NzCollapseModule,
   ]
 })
 export class UserModule {
