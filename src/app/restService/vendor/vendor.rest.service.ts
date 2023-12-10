@@ -34,6 +34,10 @@ export class VendorRestService {
   unblockUser(vendorId: number): Observable<IMessage> {
     return this.httpClient.post<IMessage>(this.ProjectUrl + '/custom/unblock-vendor', {id: vendorId}, {withCredentials: true});
   }
+
+  getTotalUser(period: number): Observable<IMessage> {
+    return this.httpClient.get<IMessage>(this.ProjectUrl + '/custom/unblock-vendor/' + period, {withCredentials: true});
+  }
 }
 
 

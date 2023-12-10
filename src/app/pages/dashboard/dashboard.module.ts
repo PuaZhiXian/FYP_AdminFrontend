@@ -20,7 +20,7 @@ import {NzToolTipModule} from "ng-zorro-antd/tooltip";
 @NgModule({
   imports: [DashboardRoutingModule, HeaderModule, NzButtonModule, NzFormModule, ReactiveFormsModule, NzInputModule, NzTableModule, CommonModule, NzSkeletonModule, NzModalModule, NzCardModule, NzMessageModule, NzToolTipModule],
   declarations: [DashboardComponent, UserTableComponent, NotificationTableComponent],
-  exports: [DashboardComponent]
+  exports: [DashboardComponent, UserTableComponent, UserTableComponent]
 })
 export class DashboardModule {
 }

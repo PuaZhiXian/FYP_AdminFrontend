@@ -33,6 +33,9 @@ export class VendorService {
     return this.vendorRestService.unblockUser(vendorId);
   }
 
+  getTotalUser(period: number): Observable<IMessage> {
+    return this.vendorRestService.getTotalUser(period);
+  }
 
 
 }

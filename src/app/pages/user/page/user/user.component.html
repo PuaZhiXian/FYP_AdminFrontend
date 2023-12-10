@@ -1,8 +1,51 @@
-<div class="h-screen">
+<div class="h-screen bg-gray-100">
   <div class="bg-primary-900">
     <app-header></app-header>
   </div>
 
   <div class="container md:mx-auto md:px-0 px-[20px]">
+    <div class="grid grid-cols-3 gap-6 my-4 ">
+      <!--Total User-->
+      <nz-card class="rounded-3xl	">
+        <div class="flex justify-between items-center">
+          <div>Total User</div>
+          <div class="">
+            <nz-select [ngModel]="selectedTotalUserDayOption" (ngModelChange)="getTotalUser()">
+              <nz-option *ngFor="let option of totalUserDayOption" [nzValue]="option"
+                         nzLabel="{{option + ' Days'}}"></nz-option>
+              <nz-option [nzValue]="0" nzLabel="All Days"></nz-option>
+            </nz-select>
+          </div>
+        </div>
+        <div class="my-2 text-title flex gap-2 items-center">
+          <div class="material-icons-outlined text-title">analytics</div>
+          <div>5186</div>
+        </div>
+      </nz-card>
+      <!--New User-->
+      <nz-card class="rounded-3xl	">
+        <div class="flex justify-between">
+          <div>New User</div>
+          <div>{{ currentDate| date: 'MMM y'}}</div>
+        </div>
+        <div class="mt-2 text-title">825</div>
+        <div>
+          <nz-progress [nzPercent]="80" [nzShowInfo]="false"></nz-progress>
+        </div>
+      </nz-card>
+      <!--Active-->
+      <nz-card class="rounded-3xl	">
+        <div class="flex justify-between">
+          <div>Active</div>
+          <div>Till Today</div>
+        </div>
+        <div class="mt-2 text-title">96%</div>
+        <div>
+          <nz-progress [nzPercent]="80" [nzShowInfo]="false"></nz-progress>
+        </div>
+      </nz-card>
+    </div>
+
+    <user-table></user-table>
   </div>
 </div>
