@@ -58,7 +58,7 @@ export class UserDetailComponent implements OnInit {
   }
 
   initApiCategoryList() {
-    this.apiCollectionService.getAPICategoryList()
+    this.apiCollectionService.getAPICategoryList("A")
       .pipe(finalize(() => {
         this.loading = false;
         this.ref.detectChanges();

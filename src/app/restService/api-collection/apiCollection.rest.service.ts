@@ -16,16 +16,16 @@ export class ApiCollectionRestService {
   constructor(private httpClient: HttpClient) {
   }
 
-  getAPICategoryList(): Observable<IApiCategory[]> {
-    return this.httpClient.get<IApiCategory[]>(this.ProjectUrl + '/custom/get-all-api-category', {withCredentials: true});
+  getAPICategoryList(character: string): Observable<IApiCategory[]> {
+    return this.httpClient.get<IApiCategory[]>(this.ProjectUrl + '/custom/get-all-api-category/' + character, {withCredentials: true});
   }
 
   createNewApiCategory(apiCategoryDetail: IApiCategory): Observable<IMessage> {
-    return this.httpClient.post<IMessage>(this.ProjectUrl + '/custom/create-api-category', apiCategoryDetail,{withCredentials: true});
+    return this.httpClient.post<IMessage>(this.ProjectUrl + '/custom/create-api-category', apiCategoryDetail, {withCredentials: true});
   }
 
   createNewApiCollection(apiCollectionDetail: IApiCollection): Observable<IMessage> {
-    return this.httpClient.post<IMessage>(this.ProjectUrl + '/custom/create-api-collection', apiCollectionDetail,{withCredentials: true});
+    return this.httpClient.post<IMessage>(this.ProjectUrl + '/custom/create-api-collection', apiCollectionDetail, {withCredentials: true});
   }
 
 

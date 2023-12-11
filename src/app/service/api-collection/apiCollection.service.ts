@@ -14,8 +14,8 @@ export class ApiCollectionService {
     private vendorRestService: ApiCollectionRestService,) {
   }
 
-  getAPICategoryList(): Observable<IApiCategory[]> {
-    return this.vendorRestService.getAPICategoryList();
+  getAPICategoryList(character: string): Observable<IApiCategory[]> {
+    return this.vendorRestService.getAPICategoryList(character);
   }
 
   createNewApiCategory(apiCategoryDetail: IApiCategory): Observable<IMessage> {

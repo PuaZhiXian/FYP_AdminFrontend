@@ -45,6 +45,13 @@ export class ApiCollectionComponent implements OnInit {
   filterCategory: number[] = [];
   loading: boolean = true;
 
+  alphabetArray: string[] = [
+    'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+    'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
+  ];
+
+  selectedAlphabet: string = 'A';
+
 
   constructor(private router: Router,
               private fb: UntypedFormBuilder,
@@ -75,7 +82,7 @@ export class ApiCollectionComponent implements OnInit {
   }
 
   initApiCategoryList() {
-    this.apiCollectionService.getAPICategoryList()
+    this.apiCollectionService.getAPICategoryList(this.selectedAlphabet)
       .pipe(finalize(() => {
         this.loading = false;
         this.ref.detectChanges();
@@ -212,6 +219,12 @@ export class ApiCollectionComponent implements OnInit {
         }
       });
     }
+  }
+
+  changeByAlphabet(alphabet: string) {
+    this.selectedAlphabet = alphabet;
+    this.loading = true;
+    this.initApiCategoryList();
   }
 
 }
