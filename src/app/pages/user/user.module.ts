@@ -17,6 +17,8 @@ import {NzCollapseModule} from "ng-zorro-antd/collapse";
 import {NzSkeletonModule} from "ng-zorro-antd/skeleton";
 import {NzEmptyModule} from "ng-zorro-antd/empty";
 import { AccessControlComponent } from './components/access-control/access-control.component';
+import {NzSpinModule} from "ng-zorro-antd/spin";
+import {NzIconModule} from "ng-zorro-antd/icon";
 
 
 @NgModule({
@@ -44,6 +46,8 @@ import { AccessControlComponent } from './components/access-control/access-contr
     NzCollapseModule,
     NzSkeletonModule,
     NzEmptyModule,
+    NzSpinModule,
+    NzIconModule,
   ]
 })
 export class UserModule {

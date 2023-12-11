@@ -28,5 +28,12 @@ export class ApiCollectionRestService {
     return this.httpClient.post<IMessage>(this.ProjectUrl + '/custom/create-api-collection', apiCollectionDetail, {withCredentials: true});
   }
 
+  giveAccessControl(vendorId: string, apiCollectionId: number[]): Observable<IMessage> {
+    return this.httpClient.post<IMessage>(this.ProjectUrl + '/custom/create-api-collection', {withCredentials: true});
+  }
+
+  revokeAccessControl(vendorId: string, apiCollectionId: number[]): Observable<IMessage> {
+    return this.httpClient.post<IMessage>(this.ProjectUrl + '/custom/create-api-collection', {withCredentials: true});
+  }
 
 }

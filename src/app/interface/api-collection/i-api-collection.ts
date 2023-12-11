@@ -7,4 +7,5 @@ export interface IApiCollection {
   api_category_id: number
   short_description: string,
   long_description: string,
+  active: boolean
 }

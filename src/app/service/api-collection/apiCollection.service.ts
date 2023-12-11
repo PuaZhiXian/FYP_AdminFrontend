@@ -26,4 +26,13 @@ export class ApiCollectionService {
     return this.vendorRestService.createNewApiCollection(apiCollectionDetail);
   }
 
+
+  giveAccessControl(vendorId: string, apiCollectionId: number[]): Observable<IMessage> {
+    return this.vendorRestService.giveAccessControl(vendorId, apiCollectionId);
+  }
+
+  revokeAccessControl(vendorId: string, apiCollectionId: number[]): Observable<IMessage> {
+    return this.vendorRestService.revokeAccessControl(vendorId, apiCollectionId);
+  }
+
 }

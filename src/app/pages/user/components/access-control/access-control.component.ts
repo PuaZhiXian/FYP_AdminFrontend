@@ -74,4 +74,54 @@ export class AccessControlComponent implements OnInit {
     this.loadingAccessControl = true;
     this.initApiCategoryList();
   }
+
+  editAccessControl(apiCollectionId: number, apiCollectionName: string, active: boolean) {
+    if (active) {
+      this.modal.confirm({
+        nzTitle: 'Are you sure revoke "' + apiCollectionName + '" from user ?',
+        nzContent: '<b style="color: red;">User will cannot use any API inside this API collection</b>',
+        nzOkText: 'Yes',
+        nzOkType: 'primary',
+        nzOkDanger: true,
+        nzOnOk: () => this.giveAccessControl(this.vendorId, [apiCollectionId], false),
+        nzCancelText: 'No'
+      });
+    } else {
+      this.modal.confirm({
+        nzTitle: 'Are you sure give "' + apiCollectionName + '" to user ?',
+        nzContent: '<b style="color: red;">User able to use any API inside this API collection</b>',
+        nzOkText: 'Yes',
+        nzOkType: 'primary',
+        nzOkDanger: true,
+        nzOnOk: () => this.giveAccessControl(this.vendorId, [apiCollectionId], true),
+        nzCancelText: 'No'
+      });
+    }
+  }
+
+  giveAccessControl(vendorId: string, apiCollectionId: number[], give: boolean) {
+    if (give) {
+      this.apiCollectionService.giveAccessControl(vendorId, apiCollectionId)
+        .pipe(finalize(() => {
+          this.initApiCategoryList();
+          this.ref.detectChanges();
+          this.ref.markForCheck();
+        }))
+        .subscribe((resp) => {
+
+        })
+    } else {
+      this.apiCollectionService.revokeAccessControl(vendorId, apiCollectionId)
+        .pipe(finalize(() => {
+          this.initApiCategoryList();
+          this.ref.detectChanges();
+          this.ref.markForCheck();
+        }))
+        .subscribe((resp) => {
+
+        })
+    }
+  }
 }
+
+
