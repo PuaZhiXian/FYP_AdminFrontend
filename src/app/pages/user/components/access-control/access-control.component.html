@@ -1,0 +1,53 @@
+<div class="flex gap-2 mb-4">
+  <button *ngFor="let alphabet of alphabetArray" (click)="changeByAlphabet(alphabet)"
+          class="inline-flex cursor-pointer items-center justify-center text-white w-8 h-8 mr-2 transition-colors duration-150 rounded-full focus:shadow-outline border-0
+              {{selectedAlphabet === alphabet ? 'bg-sky-400  hover:bg-sky-500' :'bg-gray-400  hover:bg-gray-500' }}">
+    {{alphabet}}
+  </button>
+</div>
+<nz-collapse [nzBordered]="false" *ngIf="!loadingAccessControl; else loadingAccessControlTpl">
+  <div *ngFor="let category of apiCategoryList ; let j = index">
+    <nz-collapse-panel *ngIf="category.api_collections.length > 0 " [nzShowArrow]="false"
+                       [nzHeader]="apiCollectionHeader" [nzActive]="category.isActive">
+      <div class="pb-[24px]">
+        <div class="grid grid-cols-3 gap-4">
+          <div class="rounded-3xl pl-4 {{ randomColorsArray[i % 10]}}"
+               *ngFor="let apiCollection of category.api_collections ; let i = index ">
+            <nz-card class="rounded-r-[1.3rem] border-2 cursor-pointer">
+              <div class="flex justify-between">
+                <div class="flex gap-x-4">
+                  <div class="font-bold text-subtitle">{{apiCollection.api_collection_name}}</div>
+                </div>
+              </div>
+              <div class="text-sm  min-h-[75px]">{{apiCollection.short_description}}</div>
+              <nz-divider></nz-divider>
+              <div class="flex justify-between">
+                <div>
+                  <span>Created </span>
+                  <span class="font-bold">{{apiCollection.createdAt | date: 'MMM d, y'}}</span>
+                </div>
+                <div class="justify-end">{{apiCollection.count}} Endpoints</div>
+              </div>
+            </nz-card>
+          </div>
+        </div>
+      </div>
+      <ng-template #apiCollectionHeader>
+        <div class="flex items-center gap-4 p-4 cursor-pointer">
+          <div>
+            <nz-avatar class="border border-solid border-gray-900" nzIcon="user"
+                       nzSrc="{{url[j % 3]}}"></nz-avatar>
+          </div>
+          <div class="text-doc-title">{{category.category_name}}</div>
+        </div>
+      </ng-template>
+    </nz-collapse-panel>
+  </div>
+  <div *ngIf="apiCategoryList.length == 0">
+    <nz-empty nzNotFoundImage="simple"></nz-empty>
+  </div>
+</nz-collapse>
+
+<ng-template #loadingAccessControlTpl>
+  <nz-skeleton></nz-skeleton>
+</ng-template>

@@ -16,12 +16,14 @@ import {NzAvatarModule} from "ng-zorro-antd/avatar";
 import {NzCollapseModule} from "ng-zorro-antd/collapse";
 import {NzSkeletonModule} from "ng-zorro-antd/skeleton";
 import {NzEmptyModule} from "ng-zorro-antd/empty";
+import { AccessControlComponent } from './components/access-control/access-control.component';
 
 
 @NgModule({
   declarations: [
     UserComponent,
-    UserDetailComponent
+    UserDetailComponent,
+    AccessControlComponent
   ],
   exports: [
     UserComponent
