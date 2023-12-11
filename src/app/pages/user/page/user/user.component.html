@@ -10,7 +10,7 @@
         <div class="flex justify-between items-center">
           <div>Total User</div>
           <div class="">
-            <nz-select [ngModel]="selectedTotalUserDayOption" (ngModelChange)="getTotalUser()">
+            <nz-select [(ngModel)]="selectedTotalUserDayOption" (ngModelChange)="getTotalUser()">
               <nz-option *ngFor="let option of totalUserDayOption" [nzValue]="option"
                          nzLabel="{{option + ' Days'}}"></nz-option>
               <nz-option [nzValue]="0" nzLabel="All Days"></nz-option>
@@ -19,7 +19,7 @@
         </div>
         <div class="my-2 text-title flex gap-2 items-center">
           <div class="material-icons-outlined text-title">analytics</div>
-          <div>5186</div>
+          <div *ngIf="!loadingTotalUser; else singleLoadingTpl">{{totalUser}}</div>
         </div>
       </nz-card>
       <!--New User-->
@@ -28,7 +28,7 @@
           <div>New User</div>
           <div>{{ currentDate| date: 'MMM y'}}</div>
         </div>
-        <div class="mt-2 text-title">825</div>
+        <div class="mt-2 text-title" *ngIf="!loadingNewUser; else singleLoadingTpl">{{totalNewUser}}</div>
         <div>
           <nz-progress [nzPercent]="80" [nzShowInfo]="false"></nz-progress>
         </div>
@@ -39,7 +39,7 @@
           <div>Active</div>
           <div>Till Today</div>
         </div>
-        <div class="mt-2 text-title">96%</div>
+        <div class="mt-2 text-title" *ngIf="!loadingNonActiveUser; else singleLoadingTpl">{{totalNonActiveUser}}%</div>
         <div>
           <nz-progress [nzPercent]="80" [nzShowInfo]="false"></nz-progress>
         </div>
@@ -49,3 +49,7 @@
     <user-table></user-table>
   </div>
 </div>
+
+<ng-template #singleLoadingTpl>
+  <nz-skeleton-element nzType="button" [nzActive]="true"></nz-skeleton-element>
+</ng-template>

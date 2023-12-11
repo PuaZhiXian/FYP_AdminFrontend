@@ -7,6 +7,7 @@ import {NzMessageService} from "ng-zorro-antd/message";
 import {NzModalService} from "ng-zorro-antd/modal";
 import {ApiCollectionService} from "../../../../service/api-collection/apiCollection.service";
 import {IApiCategory} from "../../../../interface/api-collection/i-api-category";
+import {HeaderComponent} from "../../../header/page/header/header.component";
 
 @Component({
   selector: 'app-user-detail',
@@ -51,6 +52,7 @@ export class UserDetailComponent implements OnInit {
       this.vendorId = params.get('id') || '';
     });
     this.initApiCategoryList();
+    HeaderComponent.headerIndicator = '';
   }
 
   initVendorDetail() {

@@ -35,9 +35,22 @@ export class VendorRestService {
     return this.httpClient.post<IMessage>(this.ProjectUrl + '/custom/unblock-vendor', {id: vendorId}, {withCredentials: true});
   }
 
-  getTotalUser(period: number): Observable<IMessage> {
-    return this.httpClient.get<IMessage>(this.ProjectUrl + '/custom/unblock-vendor/' + period, {withCredentials: true});
+  getTotalUser(period: number): Observable<number> {
+    if (period > 0) {
+      return this.httpClient.get<number>(this.ProjectUrl + '/custom/get-all-user/' + period, {withCredentials: true});
+    } else {
+      return this.httpClient.get<number>(this.ProjectUrl + '/custom/get-all-user', {withCredentials: true});
+    }
   }
+
+  getNewUser(): Observable<number> {
+    return this.httpClient.get<number>(this.ProjectUrl + '/custom/get-new-user', {withCredentials: true});
+  }
+
+  getNonActiveUser(): Observable<number> {
+    return this.httpClient.get<number>(this.ProjectUrl + '/custom/get-non-active-user', {withCredentials: true});
+  }
+
 }
 
 

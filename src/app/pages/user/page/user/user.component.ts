@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {HeaderComponent} from "../../../header/page/header/header.component";
 import {VendorService} from "../../../../service/vendor/vendor.service";
 import {NzMessageService} from "ng-zorro-antd/message";
+import {finalize} from "rxjs";
 
 @Component({
   selector: 'app-user',
@@ -13,27 +14,64 @@ export class UserComponent implements OnInit {
   currentDate: Date = new Date();
   totalUserDayOption: number[] = [30, 60, 90]
   selectedTotalUserDayOption !: number
+  totalUser: number = 0;
+  totalNewUser: number = 0;
+  totalNonActiveUser: number = 0;
+
+  loadingTotalUser: boolean = true;
+  loadingNewUser: boolean = true;
+  loadingNonActiveUser: boolean = true;
 
 
   constructor(private vendorService: VendorService,
-              private message: NzMessageService) {
+              private message: NzMessageService,
+              private ref: ChangeDetectorRef,) {
   }
 
   ngOnInit(): void {
     HeaderComponent.headerIndicator = 'user';
     this.selectedTotalUserDayOption = this.totalUserDayOption[0];
+    this.getNewUser();
+    this.getTotalUser();
+    this.getNonActiveUser();
   }
 
   getTotalUser() {
+    this.loadingTotalUser = true;
+    console.log(this.selectedTotalUserDayOption)
     this.vendorService.getTotalUser(this.selectedTotalUserDayOption)
+      .pipe(finalize(() => {
+        this.loadingTotalUser = false;
+        this.ref.detectChanges();
+        this.ref.markForCheck();
+      }))
       .subscribe((resp) => {
-        if (resp.message) {
-          this.message.success(resp.message)
-        } else {
-          this.message.error(resp.error || '')
-        }
+        this.totalUser = resp;
       })
-
   }
 
+  getNewUser() {
+    this.vendorService.getNewUser()
+      .pipe(finalize(() => {
+        this.loadingNewUser = false;
+        this.ref.detectChanges();
+        this.ref.markForCheck();
+      }))
+      .subscribe((resp) => {
+        this.totalNewUser = resp;
+      })
+  }
+
+
+  getNonActiveUser() {
+    this.vendorService.getNonActiveUser()
+      .pipe(finalize(() => {
+        this.loadingNonActiveUser = false;
+        this.ref.detectChanges();
+        this.ref.markForCheck();
+      }))
+      .subscribe((resp) => {
+        this.totalNonActiveUser = resp;
+      })
+  }
 }
