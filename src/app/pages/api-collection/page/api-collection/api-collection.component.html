@@ -33,7 +33,8 @@
             Filter By
           </div>
           <div class="grid grid-cols-6 gap-1">
-            <div *ngFor="let category of apiCategoryList" class="flex gap-1 w-full">
+            <div *ngFor="let category of apiCategoryList"
+                 class="flex gap-1 w-full {{category.api_collections.length > 0 ? '': 'hidden'}}">
               <button *ngIf="filterCategory.indexOf(category.id) !== -1 && category.api_collections.length > 0"
                       nz-button
                       nzType="primary" class="w-full"
