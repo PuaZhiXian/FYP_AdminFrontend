@@ -39,4 +39,8 @@ export class ApiCollectionService {
     return this.vendorRestService.deleteCollection(apiCollectionId);
   }
 
+  deleteCategory(categoryId: number): Observable<IMessage> {
+    return this.vendorRestService.deleteCategory(categoryId);
+  }
+
 }

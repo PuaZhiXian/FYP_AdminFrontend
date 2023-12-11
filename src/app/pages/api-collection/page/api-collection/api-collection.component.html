@@ -63,12 +63,18 @@
       <div *ngFor="let category of filteredApiCategoryList; let j = index">
         <div class="border-t border-b-0 border-solid border-x-0 pb-[24px] border-gray-600"
              *ngIf="category.api_collections.length > 0 ">
-          <div class="flex items-center my-[24px] gap-4">
+          <div class="flex items-center my-[14px] gap-4">
             <div>
               <nz-avatar class="border border-solid border-gray-900" nzIcon="user"
                          nzSrc="{{category.image_url || emptyIconUrl}}"></nz-avatar>
             </div>
             <div class="text-doc-title">{{category.category_name}}</div>
+            <div class="grow flex justify-end">
+              <span nz-tooltip (click)="confirmDeleteCategory(category.id, category.category_name)"
+                    nzTooltipTitle="Delete" nzTooltipPlacement="left" [nzTooltipMouseEnterDelay]="0.75"
+                    class="text-danger material-icons-outlined cursor-pointer text-title">delete_outline</span>
+            </div>
+
           </div>
           <div class="grid grid-cols-3 gap-4">
             <nz-card (click)="openCreateNewCollectionModal(category.id)"
@@ -93,7 +99,8 @@
                             class="bg-blue-600 p-2 border-0 text-white rounded text-button material-icons-outlined cursor-pointer">
                       edit
                     </button>-->
-                    <span nz-tooltip (click)="confirmDeleteCollection(apiCollection.id, apiCollection.api_collection_name)"
+                    <span nz-tooltip
+                          (click)="confirmDeleteCollection(apiCollection.id, apiCollection.api_collection_name)"
                           nzTooltipTitle="Delete" nzTooltipPlacement="left" [nzTooltipMouseEnterDelay]="0.75"
                           class="text-danger material-icons-outlined cursor-pointer text-[24px]">delete_outline</span>
                     <span nz-tooltip

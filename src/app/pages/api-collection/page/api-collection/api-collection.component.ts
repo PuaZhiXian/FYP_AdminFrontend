@@ -247,5 +247,28 @@ export class ApiCollectionComponent implements OnInit {
       })
   }
 
+  confirmDeleteCategory(categoryId: number, categoryName: string) {
+    this.modal.confirm({
+      nzTitle: 'Are you sure delete "' + categoryName + '" ?',
+      nzContent: '<b style="color: red;">This action is irreversible</b>',
+      nzOkText: 'Yes',
+      nzOkType: 'primary',
+      nzOkDanger: true,
+      nzOnOk: () => this.deleteCategory(categoryId),
+      nzCancelText: 'No'
+    });
+  }
+
+  deleteCategory(apiCollectionId: number) {
+    this.apiCollectionService.deleteCategory(apiCollectionId)
+      .subscribe((resp) => {
+        if (resp.message) {
+          this.message.success(resp.message)
+          this.initApiCategoryList();
+        } else {
+          this.message.error(resp.error || "")
+        }
+      })
+  }
 
 }
