@@ -35,4 +35,8 @@ export class ApiCollectionService {
     return this.vendorRestService.revokeAccessControl(vendorId, apiCollectionId);
   }
 
+  deleteCollection(apiCollectionId: number): Observable<IMessage> {
+    return this.vendorRestService.deleteCollection(apiCollectionId);
+  }
+
 }

@@ -223,4 +223,29 @@ export class ApiCollectionComponent implements OnInit {
     this.initApiCategoryList();
   }
 
+  confirmDeleteCollection(apiCollectionId: number, apiCollectionName: string) {
+    this.modal.confirm({
+      nzTitle: 'Are you sure delete "' + apiCollectionName + '" ?',
+      nzContent: '<b style="color: red;">This action is irreversible</b>',
+      nzOkText: 'Yes',
+      nzOkType: 'primary',
+      nzOkDanger: true,
+      nzOnOk: () => this.deleteCollection(apiCollectionId),
+      nzCancelText: 'No'
+    });
+  }
+
+  deleteCollection(apiCollectionId: number) {
+    this.apiCollectionService.deleteCollection(apiCollectionId)
+      .subscribe((resp) => {
+        if (resp.message) {
+          this.message.success(resp.message)
+          this.initApiCategoryList();
+        } else {
+          this.message.error(resp.error || "")
+        }
+      })
+  }
+
+
 }

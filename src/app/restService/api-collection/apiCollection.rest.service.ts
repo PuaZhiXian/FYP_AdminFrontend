@@ -36,4 +36,8 @@ export class ApiCollectionRestService {
     return this.httpClient.post<IMessage>(this.ProjectUrl + '/custom/create-api-collection', {withCredentials: true});
   }
 
+  deleteCollection(apiCollectionId: number): Observable<IMessage> {
+    return this.httpClient.delete<IMessage>(this.ProjectUrl + '/custom/delete-api-collection/' + apiCollectionId, {withCredentials: true});
+  }
+
 }
