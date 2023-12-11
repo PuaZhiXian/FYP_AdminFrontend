@@ -14,7 +14,7 @@
         <div class="grid grid-cols-3 gap-4">
           <div class="rounded-3xl pl-4 {{ randomColorsArray[i % 10]}}"
                *ngFor="let apiCollection of category.api_collections ; let i = index ">
-            <nz-card class="rounded-r-[1.3rem] border-2 cursor-pointer" (click)="editAccessControl(apiCollection.id, apiCollection.api_collection_name,apiCollection.active)">
+            <nz-card class="rounded-r-[1.3rem] border-2 cursor-pointer" (click)="editAccessControl(apiCollection.id, apiCollection.api_collection_name,apiCollection.isActive)">
               <nz-spin [nzIndicator]="indicatorTemplate">
                 <div class="flex justify-between">
                   <div class="flex gap-x-4">
@@ -39,7 +39,7 @@
         <div class="flex items-center gap-4 p-4 cursor-pointer">
           <div>
             <nz-avatar class="border border-solid border-gray-900" nzIcon="user"
-                       nzSrc="{{url[j % 3]}}"></nz-avatar>
+                       nzSrc="{{category.image_url || emptyIconUrl}}"></nz-avatar>
           </div>
           <div class="text-doc-title">{{category.category_name}}</div>
         </div>
