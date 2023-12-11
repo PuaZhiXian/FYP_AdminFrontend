@@ -15,6 +15,7 @@ import {NzTabsModule} from "ng-zorro-antd/tabs";
 import {NzAvatarModule} from "ng-zorro-antd/avatar";
 import {NzCollapseModule} from "ng-zorro-antd/collapse";
 import {NzSkeletonModule} from "ng-zorro-antd/skeleton";
+import {NzEmptyModule} from "ng-zorro-antd/empty";
 
 
 @NgModule({
@@ -25,22 +26,23 @@ import {NzSkeletonModule} from "ng-zorro-antd/skeleton";
   exports: [
     UserComponent
   ],
-    imports: [
-        NzMessageModule,
-        UserRoutingModule,
-        HeaderModule,
-        NzCardModule,
-        NzProgressModule,
-        CommonModule,
-        NzSelectModule,
-        FormsModule,
-        DashboardModule,
-        NzDividerModule,
-        NzTabsModule,
-        NzAvatarModule,
-        NzCollapseModule,
-        NzSkeletonModule,
-    ]
+  imports: [
+    NzMessageModule,
+    UserRoutingModule,
+    HeaderModule,
+    NzCardModule,
+    NzProgressModule,
+    CommonModule,
+    NzSelectModule,
+    FormsModule,
+    DashboardModule,
+    NzDividerModule,
+    NzTabsModule,
+    NzAvatarModule,
+    NzCollapseModule,
+    NzSkeletonModule,
+    NzEmptyModule,
+  ]
 })
 export class UserModule {
 }

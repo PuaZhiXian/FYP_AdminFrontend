@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {IUser} from "../../interface/user/i-user";
 import {environment} from "../../../environments/environment";
 import {IMessage} from "../../interface/authorization/i-message";
+import {IUserDetails} from "../../interface/user/i-user-details";
 
 @Injectable({
   providedIn: 'root'
@@ -49,6 +50,10 @@ export class VendorRestService {
 
   getNonActiveUser(): Observable<number> {
     return this.httpClient.get<number>(this.ProjectUrl + '/custom/get-non-active-user', {withCredentials: true});
+  }
+
+  getOneUser(vendorId: string): Observable<IUserDetails> {
+    return this.httpClient.get<IUserDetails>(this.ProjectUrl + '/custom/get-one-user/' + vendorId, {withCredentials: true});
   }
 
 }
