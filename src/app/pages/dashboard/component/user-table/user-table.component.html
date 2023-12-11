@@ -72,7 +72,7 @@
                       class="bg-green-600 p-2 border-0 text-white rounded text-button material-icons-outlined cursor-pointer">
                 lock_open
               </button>
-              <button nz-tooltip
+              <button nz-tooltip (click)="openUserDetailPage(data.id)"
                       nzTooltipTitle="open" nzTooltipPlacement="left" [nzTooltipMouseEnterDelay]="0.75"
                       class="bg-blue-600 p-2 border-0 text-white rounded text-button material-icons-outlined cursor-pointer">
                 open_in_new

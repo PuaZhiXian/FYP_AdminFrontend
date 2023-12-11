@@ -202,4 +202,8 @@ export class UserTableComponent implements OnInit {
         }
       })
   }
+
+  openUserDetailPage(vendorId: number){
+    this.router.navigate(['user','detail',vendorId])
+  }
 }
