@@ -20,6 +20,10 @@ export class ApiCollectionRestService {
     return this.httpClient.get<IApiCategory[]>(this.ProjectUrl + '/custom/get-all-api-category/' + character, {withCredentials: true});
   }
 
+  getAccessControl(vendorId: string, character: string): Observable<IApiCategory[]> {
+    return this.httpClient.post<IApiCategory[]>(this.ProjectUrl + '/custom/get-one-user-access-control/' + character,{id:vendorId}, {withCredentials: true});
+  }
+
   createNewApiCategory(apiCategoryDetail: IApiCategory): Observable<IMessage> {
     return this.httpClient.post<IMessage>(this.ProjectUrl + '/custom/create-api-category', apiCategoryDetail, {withCredentials: true});
   }

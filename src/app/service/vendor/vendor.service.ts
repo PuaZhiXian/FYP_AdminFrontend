@@ -4,6 +4,7 @@ import {VendorRestService} from "../../restService/vendor/vendor.rest.service";
 import {IUser} from "../../interface/user/i-user";
 import {IMessage} from "../../interface/authorization/i-message";
 import {IUserDetails} from "../../interface/user/i-user-details";
+import {INewUser} from "../../interface/user/i-new-user";
 
 @Injectable({
   providedIn: 'root'
@@ -38,7 +39,7 @@ export class VendorService {
     return this.vendorRestService.getTotalUser(period);
   }
 
-  getNewUser(): Observable<number> {
+  getNewUser(): Observable<INewUser> {
     return this.vendorRestService.getNewUser();
   }
 

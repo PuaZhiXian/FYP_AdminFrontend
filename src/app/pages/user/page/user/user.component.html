@@ -28,7 +28,7 @@
           <div>New User</div>
           <div>{{ currentDate| date: 'MMM y'}}</div>
         </div>
-        <div class="mt-2 text-title" *ngIf="!loadingNewUser; else singleLoadingTpl">{{totalNewUser}}</div>
+        <div class="mt-2 text-title" *ngIf="!loadingNewUser; else singleLoadingTpl">{{totalNewUser.numberOfUser}}</div>
         <div>
           <nz-progress [nzPercent]="80" [nzShowInfo]="false"></nz-progress>
         </div>

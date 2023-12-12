@@ -3,6 +3,7 @@ import {HeaderComponent} from "../../../header/page/header/header.component";
 import {VendorService} from "../../../../service/vendor/vendor.service";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {finalize} from "rxjs";
+import {INewUser} from "../../../../interface/user/i-new-user";
 
 @Component({
   selector: 'app-user',
@@ -15,7 +16,7 @@ export class UserComponent implements OnInit {
   totalUserDayOption: number[] = [30, 60, 90]
   selectedTotalUserDayOption !: number
   totalUser: number = 0;
-  totalNewUser: number = 0;
+  totalNewUser!: INewUser ;
   totalNonActiveUser: number = 0;
 
   loadingTotalUser: boolean = true;

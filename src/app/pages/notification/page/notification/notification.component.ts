@@ -7,6 +7,9 @@ import {HeaderComponent} from "../../../header/page/header/header.component";
   styleUrls: ['./notification.component.scss']
 })
 export class NotificationComponent implements OnInit {
+
+  htmlContent: any;
+
   ngOnInit(): void {
     HeaderComponent.headerIndicator = 'notification';
   }

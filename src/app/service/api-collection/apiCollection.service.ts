@@ -18,6 +18,10 @@ export class ApiCollectionService {
     return this.vendorRestService.getAPICategoryList(character);
   }
 
+  getAccessControl(vendorId: string, character: string): Observable<IApiCategory[]> {
+    return this.vendorRestService.getAccessControl(vendorId, character);
+  }
+
   createNewApiCategory(apiCategoryDetail: IApiCategory): Observable<IMessage> {
     return this.vendorRestService.createNewApiCategory(apiCategoryDetail);
   }

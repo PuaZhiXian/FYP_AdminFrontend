@@ -54,7 +54,7 @@ export class AccessControlComponent implements OnInit {
 
   initApiCategoryList() {
     this.loadingAccessControl = true;
-    this.apiCollectionService.getAPICategoryList(this.selectedAlphabet)
+    this.apiCollectionService.getAccessControl(this.vendorId, this.selectedAlphabet)
       .pipe(finalize(() => {
         this.loadingAccessControl = false;
         this.ref.detectChanges();

@@ -5,6 +5,7 @@ import {IUser} from "../../interface/user/i-user";
 import {environment} from "../../../environments/environment";
 import {IMessage} from "../../interface/authorization/i-message";
 import {IUserDetails} from "../../interface/user/i-user-details";
+import {INewUser} from "../../interface/user/i-new-user";
 
 @Injectable({
   providedIn: 'root'
@@ -44,8 +45,8 @@ export class VendorRestService {
     }
   }
 
-  getNewUser(): Observable<number> {
-    return this.httpClient.get<number>(this.ProjectUrl + '/custom/get-new-user', {withCredentials: true});
+  getNewUser(): Observable<INewUser> {
+    return this.httpClient.get<INewUser>(this.ProjectUrl + '/custom/get-new-user', {withCredentials: true});
   }
 
   getNonActiveUser(): Observable<number> {
