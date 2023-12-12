@@ -20,11 +20,12 @@ export class ProjectRestService {
   }
 
   blockProject(projectId: number): Observable<IMessage> {
-    return this.httpClient.post<IMessage>(this.ProjectUrl + '/custom/block-user-project', {projectId}, {withCredentials: true});
+    return this.httpClient.post<IMessage>(this.ProjectUrl + '/custom/block-user-project', {project_id: projectId}, {withCredentials: true});
   }
 
+
   unblockProject(projectId: number): Observable<IMessage> {
-    return this.httpClient.post<IMessage>(this.ProjectUrl + '/custom/unblock-user-project', {projectId}, {withCredentials: true});
+    return this.httpClient.post<IMessage>(this.ProjectUrl + '/custom/unblock-user-project', {project_id: projectId}, {withCredentials: true});
   }
 
 

@@ -42,6 +42,7 @@ export class ProjectComponent implements OnInit {
   }
 
   initProjectList() {
+    this.loadingTable = true;
     this.projectService.getProjectList(this.vendorId)
       .pipe(finalize(() => {
         this.loadingTable = false;
