@@ -6,7 +6,7 @@ import {NzCardModule} from "ng-zorro-antd/card";
 import {NzProgressModule} from "ng-zorro-antd/progress";
 import {CommonModule} from "@angular/common";
 import {NzSelectModule} from "ng-zorro-antd/select";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NzMessageModule} from "ng-zorro-antd/message";
 import {DashboardModule} from "../dashboard/dashboard.module";
 import { UserDetailComponent } from './page/user-detail/user-detail.component';
@@ -20,6 +20,10 @@ import { AccessControlComponent } from './components/access-control/access-contr
 import {NzSpinModule} from "ng-zorro-antd/spin";
 import {NzIconModule} from "ng-zorro-antd/icon";
 import { ProjectComponent } from './components/project/project.component';
+import {NzTableModule} from "ng-zorro-antd/table";
+import {NzFormModule} from "ng-zorro-antd/form";
+import {NzInputModule} from "ng-zorro-antd/input";
+import {NzToolTipModule} from "ng-zorro-antd/tooltip";
 
 
 @NgModule({
@@ -50,6 +54,11 @@ import { ProjectComponent } from './components/project/project.component';
     NzEmptyModule,
     NzSpinModule,
     NzIconModule,
+    NzTableModule,
+    NzFormModule,
+    ReactiveFormsModule,
+    NzInputModule,
+    NzToolTipModule,
   ]
 })
 export class UserModule {

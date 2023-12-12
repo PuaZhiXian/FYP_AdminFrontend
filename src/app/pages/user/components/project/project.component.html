@@ -1,1 +1,79 @@
-<p>project works!</p>
+<nz-card>
+  <div class="flex items-center">
+    <div class="w-1/2">
+      <form nz-form [formGroup]="validateForm">
+        <nz-form-item class="mb-0">
+          <nz-form-control>
+            <nz-input-group nzSearch nzSize="large" class="rounded bg-[#F5F5F5] focus:shadow-xl active:shadow-xl "
+                            [nzPrefix]="prefixIcon">
+              <input class="bg-[#F5F5F5] text-[#52606D] text-input" formControlName="searchKey"
+                     placeholder="Search Project" nz-input/>
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+      </form>
+    </div>
+  </div>
+  <div class="my-6" *ngIf="!loadingTable; else loadingTpl">
+    <nz-table #filterTable [nzData]="filterProjectList"
+              nzTableLayout="fixed">
+      <thead>
+      <tr class="trid">
+        <th *ngFor="let column of listOfColumns"
+            [nzShowSort]="!(column.sortFn === null)"
+            [nzSortOrder]="column.sortOrder"
+            [nzSortFn]="column.sortFn"
+            [nzWidth]="column.width"
+            class="lg:text-table-header text-xs"
+            [nzSortDirections]="column.sortDirections">
+          {{column.name}}
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let data of filterTable.data; let i = index" class=" hover:bg-[#F5F5F5]">
+        <td class="cursor-pointer lg:text-table-row text-xs">{{ data.project_name}}</td>
+        <td class="cursor-pointer lg:text-table-row text-xs">{{ data.description }}</td>
+        <td class="cursor-pointer lg:text-table-row text-xs">{{ data.createdAt | date :'dd MMM yyyy' }}</td>
+        <td class="cursor-pointer lg:text-table-row text-xs">
+          <div *ngIf="data.status === 'Approved'"
+               class="justify-center text-xs inline-flex font-bold px-3 py-1 bg-green-200 text-green-700 rounded-full min-w-[80px]">
+            APPROVED
+          </div>
+          <div *ngIf="data.status === 'Pending'"
+               class="justify-center text-xs inline-flex font-bold px-3 py-1 bg-orange-200 text-orange-700 rounded-full min-w-[80px]">
+            PENDING
+          </div>
+          <div *ngIf="data.status === 'Rejected'"
+               class="justify-center text-xs inline-flex font-bold px-3 py-1 bg-red-200 text-red-700 rounded-full min-w-[80px]">
+            REJECTED
+          </div>
+        </td>
+        <td class="cursor-pointer lg:text-table-row text-xs">
+          <div class="flex gap-2 justify-end">
+            <button *ngIf="data.status !== 'Rejected'" (click)="conformingBlockProject(data.id, data.project_name)"
+                    nz-tooltip
+                    nzTooltipTitle="block" nzTooltipPlacement="left" [nzTooltipMouseEnterDelay]="0.75"
+                    class="bg-red-600 p-2 border-0 text-white rounded text-button material-icons-outlined cursor-pointer">
+              lock
+            </button>
+            <button *ngIf="data.status ==='Rejected'" nz-tooltip (click)="unblockProject(data.id)"
+                    nzTooltipTitle="unblock" nzTooltipPlacement="left" [nzTooltipMouseEnterDelay]="0.75"
+                    class="bg-green-600 p-2 border-0 text-white rounded text-button material-icons-outlined cursor-pointer">
+              lock_open
+            </button>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </nz-table>
+  </div>
+</nz-card>
+
+<ng-template #loadingTpl>
+  <nz-skeleton></nz-skeleton>
+</ng-template>
+
+<ng-template #prefixIcon>
+  <span class=" text-[#52606D] material-icons-outlined text-input">search</span>
+</ng-template>
