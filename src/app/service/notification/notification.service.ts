@@ -12,15 +12,15 @@ import {IMessage} from "../../interface/authorization/i-message";
 export class NotificationService {
 
   constructor(
-    private vendorRestService: NotificationRestService,) {
+    private notificationRestService: NotificationRestService,) {
   }
 
   getNotificationList(): Observable<INotification[]> {
-    return this.vendorRestService.getNotificationList();
+    return this.notificationRestService.getNotificationList();
   }
 
   deleteNotification(notificationId: number): Observable<IMessage> {
-    return this.vendorRestService.deleteNotification(notificationId);
+    return this.notificationRestService.deleteNotification(notificationId);
   }
 
 }

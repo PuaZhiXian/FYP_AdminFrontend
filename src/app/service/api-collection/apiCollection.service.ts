@@ -11,40 +11,40 @@ import {IApiCollection} from "../../interface/api-collection/i-api-collection";
 export class ApiCollectionService {
 
   constructor(
-    private vendorRestService: ApiCollectionRestService,) {
+    private apiCollectionRestService: ApiCollectionRestService,) {
   }
 
   getAPICategoryList(character: string): Observable<IApiCategory[]> {
-    return this.vendorRestService.getAPICategoryList(character);
+    return this.apiCollectionRestService.getAPICategoryList(character);
   }
 
   getAccessControl(vendorId: string, character: string): Observable<IApiCategory[]> {
-    return this.vendorRestService.getAccessControl(vendorId, character);
+    return this.apiCollectionRestService.getAccessControl(vendorId, character);
   }
 
   createNewApiCategory(apiCategoryDetail: IApiCategory): Observable<IMessage> {
-    return this.vendorRestService.createNewApiCategory(apiCategoryDetail);
+    return this.apiCollectionRestService.createNewApiCategory(apiCategoryDetail);
   }
 
   createNewApiCollection(apiCollectionDetail: IApiCollection): Observable<IMessage> {
-    return this.vendorRestService.createNewApiCollection(apiCollectionDetail);
+    return this.apiCollectionRestService.createNewApiCollection(apiCollectionDetail);
   }
 
 
   giveAccessControl(vendorId: string, apiCollectionId: number[]): Observable<IMessage> {
-    return this.vendorRestService.giveAccessControl(vendorId, apiCollectionId);
+    return this.apiCollectionRestService.giveAccessControl(vendorId, apiCollectionId);
   }
 
   revokeAccessControl(vendorId: string, apiCollectionId: number[]): Observable<IMessage> {
-    return this.vendorRestService.revokeAccessControl(vendorId, apiCollectionId);
+    return this.apiCollectionRestService.revokeAccessControl(vendorId, apiCollectionId);
   }
 
   deleteCollection(apiCollectionId: number): Observable<IMessage> {
-    return this.vendorRestService.deleteCollection(apiCollectionId);
+    return this.apiCollectionRestService.deleteCollection(apiCollectionId);
   }
 
   deleteCategory(categoryId: number): Observable<IMessage> {
-    return this.vendorRestService.deleteCategory(categoryId);
+    return this.apiCollectionRestService.deleteCategory(categoryId);
   }
 
 }
