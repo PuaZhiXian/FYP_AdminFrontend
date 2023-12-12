@@ -19,13 +19,15 @@ import {NzEmptyModule} from "ng-zorro-antd/empty";
 import { AccessControlComponent } from './components/access-control/access-control.component';
 import {NzSpinModule} from "ng-zorro-antd/spin";
 import {NzIconModule} from "ng-zorro-antd/icon";
+import { ProjectComponent } from './components/project/project.component';
 
 
 @NgModule({
   declarations: [
     UserComponent,
     UserDetailComponent,
-    AccessControlComponent
+    AccessControlComponent,
+    ProjectComponent
   ],
   exports: [
     UserComponent
