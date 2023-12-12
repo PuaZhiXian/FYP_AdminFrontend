@@ -147,8 +147,8 @@ export class ProjectComponent implements OnInit {
     });
   }
 
-  blockProject(vendorId: number) {
-    /*this.vendorService.blockUser(vendorId)
+  blockProject(projectId: number) {
+    this.projectService.blockProject(projectId)
       .subscribe((resp) => {
         if (resp.message) {
           this.message.success(resp.message);
@@ -156,11 +156,11 @@ export class ProjectComponent implements OnInit {
         } else if (resp.error) {
           this.message.error(resp.error);
         }
-      })*/
+      })
   }
 
-  unblockProject(vendorId: number) {
-    /*this.vendorService.unblockUser(vendorId)
+  unblockProject(projectId: number) {
+    this.projectService.unblockProject(projectId)
       .subscribe((resp) => {
         if (resp.message) {
           this.message.success(resp.message);
@@ -168,7 +168,7 @@ export class ProjectComponent implements OnInit {
         } else if (resp.error) {
           this.message.error(resp.error);
         }
-      })*/
+      })
   }
 
 }
