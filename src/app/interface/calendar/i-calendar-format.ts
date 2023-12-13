@@ -1,5 +1,5 @@
 export interface ICalendarFormat {
-  date?: number,
+  date?: Date,
   str?: number,
   info?: string,
 }
