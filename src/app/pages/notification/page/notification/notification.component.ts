@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {HeaderComponent} from "../../../header/page/header/header.component";
 import {ICalendarEvent} from "../../../../interface/calendar/i-calendar-event";
 import {NotificationService} from "../../../../service/notification/notification.service";
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-notification',
@@ -11,6 +12,10 @@ import {NotificationService} from "../../../../service/notification/notification
 export class NotificationComponent implements OnInit {
 
   htmlContent: string = '';
+  createNotificationDrawerVisibility: boolean = true;
+  editNotification: boolean = false;
+  validateForm!: UntypedFormGroup;
+  color: string = 'green';
 
   eventList: ICalendarEvent[][][] = []
   temp: ICalendarEvent[][][] = [
@@ -48,11 +53,24 @@ export class NotificationComponent implements OnInit {
     [],
   ]
 
-  constructor(private notificationService: NotificationService) {
+  constructor(private notificationService: NotificationService,
+              private fb: UntypedFormBuilder,) {
   }
 
   ngOnInit(): void {
     HeaderComponent.headerIndicator = 'notification';
+    this.initForm();
+  }
+
+  initForm() {
+    this.validateForm = this.fb.group({
+      title: [null, [Validators.required]],
+      description: [null, []],
+      richText: [null, [Validators.required]],
+      startDate: [null, [Validators.required]],
+      endDate: [null, [Validators.required]],
+      color: [null, [Validators.required]],
+    });
   }
 
   initNotificationEvent() {
@@ -62,11 +80,22 @@ export class NotificationComponent implements OnInit {
       })
   }
 
-  createNotification(date: Date) {
-    console.log('creating notification on date  ' + date);
+  createNotification() {
+    console.log('creating notification on date  ');
   }
 
-  openNotification(eventId: string) {
+  openNotificationDrawer(eventId: string | Date) {
+    this.editNotification = typeof eventId === 'string'
+    this.createNotificationDrawerVisibility = true;
     console.log('open notification with eventId' + eventId);
   }
+
+  closeNotificationDrawer() {
+    this.createNotificationDrawerVisibility = false;
+  }
+
+  changeColor(color: string) {
+    this.color = color;
+  }
+
 }
