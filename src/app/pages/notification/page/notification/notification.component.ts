@@ -10,6 +10,8 @@ import {NotificationService} from "../../../../service/notification/notification
 })
 export class NotificationComponent implements OnInit {
 
+  htmlContent: string = '';
+
   eventList: ICalendarEvent[][][] = []
   temp: ICalendarEvent[][][] = [
     [],
@@ -53,9 +55,9 @@ export class NotificationComponent implements OnInit {
     HeaderComponent.headerIndicator = 'notification';
   }
 
-  initNotificationEvent(){
+  initNotificationEvent() {
     this.notificationService.getNotificationEventList()
-      .subscribe((resp)=>{
+      .subscribe((resp) => {
         this.eventList = resp
       })
   }

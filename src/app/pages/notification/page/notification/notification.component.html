@@ -5,12 +5,14 @@
 
   <div class="container md:mx-auto md:px-0 px-[20px]">
 
+    <rich-text-editor [(htmlContent)]="htmlContent"></rich-text-editor>
+
     <calendar [eventList]="eventList" (callClickEventOnDateRequest)="createNotification($event)"
               (callClickEventOnEventRequest)="openNotification($event)"></calendar>
 
     <calendar [eventList]="temp" (callClickEventOnDateRequest)="createNotification($event)"
               (callClickEventOnEventRequest)="openNotification($event)"></calendar>
-    <!--    <angular-editor height="80px" [placeholder]="'Enter text here...'" [(ngModel)]="htmlContent"></angular-editor>-->
+
 
   </div>
 </div>

@@ -9,12 +9,14 @@ import {NzBadgeModule} from "ng-zorro-antd/badge";
 import {CommonModule} from "@angular/common";
 import {NzButtonModule} from "ng-zorro-antd/button";
 import { CalendarComponent } from './component/calendar/calendar.component';
+import { RichTextEditorComponent } from './component/rich-text-editor/rich-text-editor.component';
 
 
 @NgModule({
   declarations: [
     NotificationComponent,
-    CalendarComponent
+    CalendarComponent,
+    RichTextEditorComponent
   ],
   exports: [
     NotificationComponent
