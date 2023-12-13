@@ -74,9 +74,9 @@ export class CalendarComponent implements OnInit {
     }
 
     //create future month
-    let nextMonth: number = this.currMonth - 1;
+    let nextMonth: number = this.currMonth + 1;
     for (let i = lastDayofMonth; i < 6; i++) {
-      if (previousMonth > 11) {
+      if (nextMonth > 11) {
         // current month is Dec
         tempCalendarDate.push(
           {
