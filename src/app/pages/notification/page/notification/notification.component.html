@@ -4,9 +4,55 @@
   </div>
 
   <div class="container md:mx-auto md:px-0 px-[20px]">
-    <div>
-      <angular-editor height="80px" [placeholder]="'Enter text here...'" [(ngModel)]="htmlContent"></angular-editor>
 
+
+    <div class="flex items-center gap-5">
+      <div>
+        <button (click)="redirectToToday()"> Today</button>
+      </div>
+      <!--next & previous month-->
+      <div>
+        <button (click)="changeMonth(this.currMonth - 1)">To Left</button>
+        <button (click)="changeMonth(this.currMonth + 1)">To Right</button>
+      </div>
+      <!--current month & year-->
+      <div class="flex items-center gap-2">
+        <div>{{months[currMonth]}}</div>
+        <div>{{currYear}}</div>
+      </div>
     </div>
+    <div class="">
+      <div class="w-full grid grid-cols-7">
+        <div *ngFor="let day of days" class="px-[8px] mx-[4px] pb-[5px] flex justify-center">{{day}}</div>
+      </div>
+
+      <div *ngFor="let row of splittedCalendarDate;  let i = index" class="w-full relative mh-min-[120px] h-[120px]">
+        <!--Use to show date-->
+        <div class=" grid grid-cols-7 absolute z-20 w-full ">
+          <div *ngFor="let day of row" class="flex justify-center pt-[4px] px-[8px]
+             mx-[4px] border-t border-x-0 border-b-0 border-solid border-gray-300 " (click)="log('one day')">
+            <div class="{{day.info === 'current'? ' text-black ':' text-gray-400 '}}
+                     {{day.info === 'today'? ' text-white bg-sky-600 rounded-full px-[5px]':''}}">{{day.date}}</div>
+          </div>
+        </div>
+        <!--Empty space-->
+        <div class=" grid grid-cols-7 absolute z-10 w-full ">
+          <div *ngFor="let day of row" class="flex justify-center h-[110px] cursor-pointer" (click)="createNotification()"></div>
+        </div>
+        <!--Use to show event-->
+        <div class=" grid grid-cols-7 h-[120px]  h-min-[120px] pt-[30px]">
+          <div class="relative text-gray-400 items-end" *ngFor="let eventRow of eventList[i]">
+            <div *ngFor="let eventDate of eventRow" (click)="log(eventDate.temp || '')"
+                 class="absolute inset-x-0 z-30 cursor-pointer pl-[5px] text-black h-[22px]
+                     {{ eventDate.level === 1 ? 'mt-[26px]' : eventDate.level === 2 ? 'mt-[52px]': ''}} {{eventDate.color}}
+                     {{eventDate.isEnd ? 'rounded-r-md mr-[10px]':''}} {{eventDate.isStart ? 'rounded-l-md':''}}">{{eventDate.title || ' '}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--    <angular-editor height="80px" [placeholder]="'Enter text here...'" [(ngModel)]="htmlContent"></angular-editor>-->
+
   </div>
 </div>

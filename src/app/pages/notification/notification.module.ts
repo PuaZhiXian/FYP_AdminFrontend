@@ -4,6 +4,9 @@ import {HeaderModule} from "../header/header.module";
 import {NotificationComponent} from './page/notification/notification.component';
 import {AngularEditorModule} from "@kolkov/angular-editor";
 import {FormsModule} from "@angular/forms";
+import {NzCalendarModule} from "ng-zorro-antd/calendar";
+import {NzBadgeModule} from "ng-zorro-antd/badge";
+import {CommonModule} from "@angular/common";
 
 
 @NgModule({
@@ -18,6 +21,9 @@ import {FormsModule} from "@angular/forms";
     HeaderModule,
     AngularEditorModule,
     FormsModule,
+    NzCalendarModule,
+    NzBadgeModule,
+    CommonModule,
   ]
 })
 export class NotificationModule {
