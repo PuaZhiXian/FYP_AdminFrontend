@@ -8,11 +8,13 @@ import {NzCalendarModule} from "ng-zorro-antd/calendar";
 import {NzBadgeModule} from "ng-zorro-antd/badge";
 import {CommonModule} from "@angular/common";
 import {NzButtonModule} from "ng-zorro-antd/button";
+import { CalendarComponent } from './component/calendar/calendar.component';
 
 
 @NgModule({
   declarations: [
-    NotificationComponent
+    NotificationComponent,
+    CalendarComponent
   ],
   exports: [
     NotificationComponent
