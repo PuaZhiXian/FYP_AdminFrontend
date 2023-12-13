@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {HeaderComponent} from "../../../header/page/header/header.component";
 import {ICalendarEvent} from "../../../../interface/calendar/i-calendar-event";
+import {NotificationService} from "../../../../service/notification/notification.service";
 
 @Component({
   selector: 'app-notification',
@@ -9,7 +10,8 @@ import {ICalendarEvent} from "../../../../interface/calendar/i-calendar-event";
 })
 export class NotificationComponent implements OnInit {
 
-  eventList: ICalendarEvent[][][] = [
+  eventList: ICalendarEvent[][][] = []
+  temp: ICalendarEvent[][][] = [
     [],
     [
       [
@@ -44,9 +46,18 @@ export class NotificationComponent implements OnInit {
     [],
   ]
 
+  constructor(private notificationService: NotificationService) {
+  }
 
   ngOnInit(): void {
     HeaderComponent.headerIndicator = 'notification';
+  }
+
+  initNotificationEvent(){
+    this.notificationService.getNotificationEventList()
+      .subscribe((resp)=>{
+        this.eventList = resp
+      })
   }
 
   createNotification(date: Date) {

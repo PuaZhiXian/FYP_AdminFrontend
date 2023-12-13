@@ -7,6 +7,9 @@
 
     <calendar [eventList]="eventList" (callClickEventOnDateRequest)="createNotification($event)"
               (callClickEventOnEventRequest)="openNotification($event)"></calendar>
+
+    <calendar [eventList]="temp" (callClickEventOnDateRequest)="createNotification($event)"
+              (callClickEventOnEventRequest)="openNotification($event)"></calendar>
     <!--    <angular-editor height="80px" [placeholder]="'Enter text here...'" [(ngModel)]="htmlContent"></angular-editor>-->
 
   </div>
