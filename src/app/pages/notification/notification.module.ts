@@ -7,6 +7,7 @@ import {FormsModule} from "@angular/forms";
 import {NzCalendarModule} from "ng-zorro-antd/calendar";
 import {NzBadgeModule} from "ng-zorro-antd/badge";
 import {CommonModule} from "@angular/common";
+import {NzButtonModule} from "ng-zorro-antd/button";
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import {CommonModule} from "@angular/common";
     NzCalendarModule,
     NzBadgeModule,
     CommonModule,
+    NzButtonModule,
   ]
 })
 export class NotificationModule {

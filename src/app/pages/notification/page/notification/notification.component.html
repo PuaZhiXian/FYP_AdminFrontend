@@ -6,21 +6,23 @@
   <div class="container md:mx-auto md:px-0 px-[20px]">
 
 
-    <div class="flex items-center gap-5">
+    <!--Navigation Bar-->
+    <div class="flex items-center gap-5 my-[10px]">
       <div>
-        <button (click)="redirectToToday()"> Today</button>
+        <button nz-button nzType="primary" (click)="redirectToToday()">Today</button>
       </div>
       <!--next & previous month-->
-      <div>
-        <button (click)="changeMonth(this.currMonth - 1)">To Left</button>
-        <button (click)="changeMonth(this.currMonth + 1)">To Right</button>
+      <div class="flex items-center">
+        <span (click)="changeMonth(this.currMonth - 1)" class="material-icons-outlined rounded-full text-title cursor-pointer hover:bg-gray-200 active:bg-gray-300">chevron_left</span>
+        <span (click)="changeMonth(this.currMonth + 1)" class="material-icons-outlined rounded-full text-title cursor-pointer hover:bg-gray-200 active:bg-gray-300">chevron_right</span>
       </div>
       <!--current month & year-->
       <div class="flex items-center gap-2">
-        <div>{{months[currMonth]}}</div>
-        <div>{{currYear}}</div>
+        <div class="text-title">{{months[currMonth]}}</div>
+        <div class="text-title">{{currYear}}</div>
       </div>
     </div>
+    <!--Calendar-->
     <div class="">
       <div class="w-full grid grid-cols-7">
         <div *ngFor="let day of days" class="px-[8px] mx-[4px] pb-[5px] flex justify-center">{{day}}</div>
