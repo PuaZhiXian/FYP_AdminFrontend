@@ -49,7 +49,11 @@ export class NotificationComponent implements OnInit {
     HeaderComponent.headerIndicator = 'notification';
   }
 
-  createNotification() {
-    console.log('creating notification')
+  createNotification(date: Date) {
+    console.log('creating notification on date  ' + date);
+  }
+
+  openNotification(eventId: string) {
+    console.log('open notification with eventId' + eventId);
   }
 }

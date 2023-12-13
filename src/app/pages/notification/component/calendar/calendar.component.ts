@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ICalendarFormat} from "../../../../interface/calendar/i-calendar-format";
 import {ICalendarEvent} from "../../../../interface/calendar/i-calendar-event";
 
@@ -10,7 +10,8 @@ import {ICalendarEvent} from "../../../../interface/calendar/i-calendar-event";
 export class CalendarComponent implements OnInit {
 
   @Input() eventList: ICalendarEvent[][][] = [];
-
+  @Output() callClickEventOnDateRequest = new EventEmitter<Date>();
+  @Output() callClickEventOnEventRequest = new EventEmitter<string>();
 
   readonly months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   readonly days = ["Su", "Mo", 'Tu', "We", 'Th', 'Fr', 'Sa'];
@@ -96,11 +97,11 @@ export class CalendarComponent implements OnInit {
     }, []);
   }
 
-  clickEventOnDate() {
-    console.log('click on date');
+  clickEventOnDate(date: number | undefined) {
+    this.callClickEventOnDateRequest.emit(new Date(this.currYear, this.currMonth, date));
   }
 
-  clickEventOnEvent(str: string) {
-    console.log('click on event');
+  clickEventOnEvent(clickResponse: string) {
+    this.callClickEventOnEventRequest.emit(clickResponse);
   }
 }

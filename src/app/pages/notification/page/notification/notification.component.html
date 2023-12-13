@@ -5,7 +5,8 @@
 
   <div class="container md:mx-auto md:px-0 px-[20px]">
 
-    <calendar [eventList]="eventList" ></calendar>
+    <calendar [eventList]="eventList" (callClickEventOnDateRequest)="createNotification($event)"
+              (callClickEventOnEventRequest)="openNotification($event)"></calendar>
     <!--    <angular-editor height="80px" [placeholder]="'Enter text here...'" [(ngModel)]="htmlContent"></angular-editor>-->
 
   </div>

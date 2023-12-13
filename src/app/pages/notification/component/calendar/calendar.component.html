@@ -30,7 +30,7 @@
     </div>
     <!--Empty space-->
     <div class=" grid grid-cols-7 absolute z-10 w-full ">
-      <div *ngFor="let day of row" class="flex justify-center h-[110px] cursor-pointer" (click)="clickEventOnDate()"></div>
+      <div *ngFor="let day of row" class="flex justify-center h-[110px] cursor-pointer" (click)="clickEventOnDate(day.date)"></div>
     </div>
     <!--Use to show event-->
     <div class=" grid grid-cols-7 h-[120px]  h-min-[120px] pt-[30px]">
