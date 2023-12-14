@@ -34,6 +34,14 @@ export class CalendarComponent implements OnInit {
     let tempCalendarDate: ICalendarFormat[] = [];
 
     //create previous month day
+    /*if (this.currMonth < 0 || this.currMonth > 11) { // if current month is less than 0 or greater than 11
+      // creating a new date of current year & month and pass it as date value
+      this.date = new Date(this.currYear, this.currMonth, new Date().getDate());
+      this.currYear = this.date.getFullYear(); // updating current year with new date year
+      this.currMonth = this.date.getMonth(); // updating current month with new date month
+    }*/
+
+    let previousMonth: number = this.currMonth - 1;
     for (let i = firstDayofMonth; i > 0; i--) {
       tempCalendarDate.push(
         {

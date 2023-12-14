@@ -64,6 +64,7 @@ export class NotificationComponent implements OnInit {
   ngOnInit(): void {
     HeaderComponent.headerIndicator = 'notification';
     this.initForm();
+    this.initNotificationEvent();
   }
 
   initForm() {
