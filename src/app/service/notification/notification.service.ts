@@ -4,6 +4,7 @@ import {NotificationRestService} from "../../restService/notification/notificati
 import {INotification} from "../../interface/notification/i-notification";
 import {IMessage} from "../../interface/authorization/i-message";
 import {ICalendarEvent} from "../../interface/calendar/i-calendar-event";
+import {INotificationAlert} from "../../interface/notification/i-notification-alert";
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +33,10 @@ export class NotificationService {
 
   getSingleNotification(eventId: string): Observable<INotification> {
     return this.notificationRestService.getSingleNotification(eventId);
+  }
+
+  getNotificationAlertList():Observable<INotificationAlert[]>{
+    return this.notificationRestService.getNotificationAlertList();
   }
 
 }

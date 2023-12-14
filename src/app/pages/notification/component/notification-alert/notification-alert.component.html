@@ -1,0 +1,14 @@
+<div class="flex items-center gap-4 my-[10px]">
+  <div *ngFor="let alert of notificationAlertList" class="h-[150px] w-[150px] rounded-lg bg-gradient-to-br p-[10px] text-gray-800
+            {{alert.color === 'red' ? 'from-[#ff0844] to-[#ffb199] hover:to-red-400' : ''}}
+            {{alert.color === 'green' ? 'from-[#338b93] to-[#b6f492] hover:to-green-400' : ''}}
+            {{alert.color === 'yellow' ? 'from-[#ffc87c] to-[#fcfb79] hover:to-yellow-400' : ''}}">
+    <div class="flex gap-2 items-center">
+      <div class="text-title ">{{alert.date | date :'dd'}}</div>
+      <div class="text-subtitle">{{alert.title}}</div>
+    </div>
+    <div class="text-doc-text">{{alert.date | date: 'dd MMMM YYYY'}}</div>
+    <div class="text-doc-text ">{{alert.description}}</div>
+  </div>
+</div>
+

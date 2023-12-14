@@ -16,13 +16,15 @@ import {NzInputModule} from "ng-zorro-antd/input";
 import {NzDatePickerModule} from "ng-zorro-antd/date-picker";
 import {NzMessageModule} from "ng-zorro-antd/message";
 import {NzSkeletonModule} from "ng-zorro-antd/skeleton";
+import { NotificationAlertComponent } from './component/notification-alert/notification-alert.component';
 
 
 @NgModule({
   declarations: [
     NotificationComponent,
     CalendarComponent,
-    RichTextEditorComponent
+    RichTextEditorComponent,
+    NotificationAlertComponent
   ],
   exports: [
     NotificationComponent

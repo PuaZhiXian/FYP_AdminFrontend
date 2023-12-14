@@ -5,6 +5,7 @@ import {environment} from "../../../environments/environment";
 import {INotification} from "../../interface/notification/i-notification";
 import {IMessage} from "../../interface/authorization/i-message";
 import {ICalendarEvent} from "../../interface/calendar/i-calendar-event";
+import {INotificationAlert} from "../../interface/notification/i-notification-alert";
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +35,10 @@ export class NotificationRestService {
 
   getSingleNotification(eventId: string): Observable<INotification> {
     return this.httpClient.get<INotification>(this.ProjectUrl + '/TODO' + eventId, {withCredentials: true});
+  }
+
+  getNotificationAlertList(): Observable<INotificationAlert[]> {
+    return this.httpClient.get<INotificationAlert[]>(this.ProjectUrl + '/custom/get-announcement-list', {withCredentials: true});
   }
 
 }
