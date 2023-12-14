@@ -3,15 +3,7 @@ import {HeaderComponent} from "../../../header/page/header/header.component";
 import {ICalendarEvent} from "../../../../interface/calendar/i-calendar-event";
 import {NotificationService} from "../../../../service/notification/notification.service";
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
-
-interface temp {
-  "title": string,
-  "description": string
-  "announcement_text": string,
-  "isActive": boolean,
-  "startDate": Date,
-  "endDate": Date
-}
+import {NzMessageService} from "ng-zorro-antd/message";
 
 @Component({
   selector: 'app-notification',
@@ -24,7 +16,8 @@ export class NotificationComponent implements OnInit {
   createNotificationDrawerVisibility: boolean = false;
   editNotification: boolean = false;
   validateForm!: UntypedFormGroup;
-  color: string = 'green';
+  notificationColor: string = 'green';
+
 
   eventList: ICalendarEvent[][][] = []
   temp: ICalendarEvent[][][] = [
@@ -63,7 +56,8 @@ export class NotificationComponent implements OnInit {
   ]
 
   constructor(private notificationService: NotificationService,
-              private fb: UntypedFormBuilder,) {
+              private fb: UntypedFormBuilder,
+              private message: NzMessageService) {
   }
 
   ngOnInit(): void {
@@ -75,7 +69,8 @@ export class NotificationComponent implements OnInit {
     this.validateForm = this.fb.group({
       title: [null, [Validators.required]],
       description: [null, []],
-      richText: [null, [Validators.required]],
+      announcement_text: [null, [Validators.required]],
+      rangeDate: [null, []],
       startDate: [null, [Validators.required]],
       endDate: [null, [Validators.required]],
       color: [null, [Validators.required]],
@@ -90,28 +85,46 @@ export class NotificationComponent implements OnInit {
   }
 
   createNotification() {
-    console.log(this.htmlContent)
-
-    let request = {
-      data: {
-        "title": "afsfsa F",
-        "description": "dfdsfdsgdsg",
-        "announcement_text": this.htmlContent,
-        "isActive": true,
-        "startDate": "2023-12-09T17:15:00.000Z",
-        "endDate": "2024-12-10T16:45:00.000Z"
+    this.validateForm.patchValue({
+      startDate: this.validateForm.value.rangeDate[0],
+      endDate: this.validateForm.value.rangeDate[1],
+      color: this.notificationColor,
+      announcement_text: this.htmlContent
+    })
+    if (this.validateForm.valid) {
+      console.log('call api')
+      /*this.notificationService.createNotification(this.validateForm.value)
+        .subscribe((resp) => {
+          console.log(resp)
+        })*/
+    } else {
+      Object.values(this.validateForm.controls).forEach(control => {
+        if (control.invalid) {
+          control.markAsDirty();
+          control.updateValueAndValidity({onlySelf: true});
+        }
+      });
+      let announcementTextControl = this.validateForm.controls['announcement_text']
+      if (announcementTextControl.invalid) {
+        announcementTextControl.markAsDirty()
+        announcementTextControl.updateValueAndValidity({onlySelf: true})
+        this.message.error('Cannot empty announcement text')
       }
     }
-    this.notificationService.createNotification(request)
-      .subscribe((resp) => {
-        console.log(resp)
-      })
   }
 
-  openNotificationDrawer(eventId: string | Date) {
-    this.editNotification = typeof eventId === 'string'
+  openNotificationDrawerCreate(date: Date) {
     this.createNotificationDrawerVisibility = true;
-    console.log('open notification with eventId' + eventId);
+    let startDate = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0)
+    let endDate = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 23, 59, 59)
+    this.validateForm.patchValue(
+      {rangeDate: [startDate, endDate]}
+    )
+  }
+
+  openNotificationDrawerEdit(eventId: string) {
+    this.editNotification = true;
+    this.createNotificationDrawerVisibility = true;
   }
 
   closeNotificationDrawer() {
@@ -119,7 +132,7 @@ export class NotificationComponent implements OnInit {
   }
 
   changeColor(color: string) {
-    this.color = color;
+    this.notificationColor = color;
   }
 
 }

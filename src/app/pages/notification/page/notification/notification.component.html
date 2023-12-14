@@ -8,8 +8,8 @@
 <!--    <calendar [eventList]="eventList" (callClickEventOnDateRequest)="openNotificationDrawer($event)"
               (callClickEventOnEventRequest)="openNotificationDrawer($event)"></calendar>-->
 
-    <calendar [eventList]="temp" (callClickEventOnDateRequest)="openNotificationDrawer($event)"
-              (callClickEventOnEventRequest)="openNotificationDrawer($event)"></calendar>
+    <calendar [eventList]="temp" (callClickEventOnDateRequest)="openNotificationDrawerCreate($event)"
+              (callClickEventOnEventRequest)="openNotificationDrawerEdit($event)"></calendar>
 
   </div>
 </div>
@@ -47,7 +47,7 @@
         <nz-form-item class="flex items-center">
           <nz-form-label nzRequired>Period</nz-form-label>
           <nz-form-control>
-            <nz-range-picker nzShowTime formControlName="startDate"></nz-range-picker>
+            <nz-range-picker nzShowTime formControlName="rangeDate"></nz-range-picker>
           </nz-form-control>
         </nz-form-item>
       </div>
@@ -57,17 +57,17 @@
         <div class="flex items-center gap-3">
           <div (click)="changeColor('green')"
                class="cursor-pointer h-[40px] w-[40px] rounded-md hover:border-2 hover:border-solid hover:p-[4px] border-sky-600
-                    {{color === 'green' ? 'p-[4px] border border-solid border-2': ''}}">
+                    {{notificationColor === 'green' ? 'p-[4px] border border-solid border-2': ''}}">
             <div class="bg-green-400 h-full w-full"></div>
           </div>
           <div (click)="changeColor('yellow')"
                class="cursor-pointer h-[40px] w-[40px] rounded-md hover:border-2 hover:border-solid hover:p-[4px] border-sky-600
-                    {{color === 'yellow' ? 'p-[4px] border border-2 border-solid': ''}}">
+                    {{notificationColor === 'yellow' ? 'p-[4px] border border-2 border-solid': ''}}">
             <div class="bg-yellow-400 h-full w-full"></div>
           </div>
           <div (click)="changeColor('red')"
                class="cursor-pointer h-[40px] w-[40px] rounded-md hover:border-2 hover:border-solid hover:p-[4px] border-sky-600
-                    {{color === 'red' ? 'p-[4px] border border-2 border-solid': ''}}">
+                    {{notificationColor === 'red' ? 'p-[4px] border border-2 border-solid': ''}}">
             <div class="bg-rose-400 h-full w-full"></div>
           </div>
         </div>

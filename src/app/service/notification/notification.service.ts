@@ -22,11 +22,12 @@ export class NotificationService {
     return this.notificationRestService.deleteNotification(notificationId);
   }
 
-  getNotificationEventList():Observable<ICalendarEvent[][][]>{
+  getNotificationEventList(): Observable<ICalendarEvent[][][]> {
     return this.notificationRestService.getNotificationEventList();
   }
-  createNotification(any:any):Observable<any>{
-    return this.notificationRestService.createNotification(any);
+
+  createNotification(notification: INotification): Observable<IMessage> {
+    return this.notificationRestService.createNotification(notification);
   }
 
 }
