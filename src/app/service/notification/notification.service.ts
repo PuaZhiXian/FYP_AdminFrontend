@@ -30,4 +30,8 @@ export class NotificationService {
     return this.notificationRestService.createNotification(notification);
   }
 
+  getSingleNotification(eventId: string): Observable<INotification> {
+    return this.notificationRestService.getSingleNotification(eventId);
+  }
+
 }

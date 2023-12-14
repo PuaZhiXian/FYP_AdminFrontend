@@ -32,4 +32,8 @@ export class NotificationRestService {
     return this.httpClient.post<IMessage>(this.ProjectUrl + '/announcements', notification, {withCredentials: true});
   }
 
+  getSingleNotification(eventId: string): Observable<INotification> {
+    return this.httpClient.get<INotification>(this.ProjectUrl + '/TODO' + eventId, {withCredentials: true});
+  }
+
 }

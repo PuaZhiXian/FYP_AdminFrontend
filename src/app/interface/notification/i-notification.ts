@@ -5,4 +5,5 @@ export interface INotification {
   announcement_text?: string,
   startDate: Date,
   endDate: Date,
+  color: string,
 }
