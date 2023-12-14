@@ -5,6 +5,7 @@ import {environment} from "../../../environments/environment";
 import {IMessage} from "../../interface/authorization/i-message";
 import {IApiCategory} from "../../interface/api-collection/i-api-category";
 import {IApiCollection} from "../../interface/api-collection/i-api-collection";
+import {ISetAccessControl} from "../../interface/api-collection/i-set-access-control";
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,7 @@ export class ApiCollectionRestService {
   }
 
   getAccessControl(vendorId: string, character: string): Observable<IApiCategory[]> {
-    return this.httpClient.post<IApiCategory[]>(this.ProjectUrl + '/custom/get-one-user-access-control/' + character,{id:vendorId}, {withCredentials: true});
+    return this.httpClient.post<IApiCategory[]>(this.ProjectUrl + '/custom/get-one-user-access-control/' + character, {id: vendorId}, {withCredentials: true});
   }
 
   createNewApiCategory(apiCategoryDetail: IApiCategory): Observable<IMessage> {
@@ -32,12 +33,8 @@ export class ApiCollectionRestService {
     return this.httpClient.post<IMessage>(this.ProjectUrl + '/custom/create-api-collection', apiCollectionDetail, {withCredentials: true});
   }
 
-  giveAccessControl(vendorId: string, apiCollectionId: number[]): Observable<IMessage> {
-    return this.httpClient.post<IMessage>(this.ProjectUrl + '/custom/create-api-collection', {withCredentials: true});
-  }
-
-  revokeAccessControl(vendorId: string, apiCollectionId: number[]): Observable<IMessage> {
-    return this.httpClient.post<IMessage>(this.ProjectUrl + '/custom/create-api-collection', {withCredentials: true});
+  setAccessControl(setAccessControl: ISetAccessControl): Observable<IMessage> {
+    return this.httpClient.post<IMessage>(this.ProjectUrl + '/custom/set-one-user-access-control', setAccessControl, {withCredentials: true});
   }
 
   deleteCollection(apiCollectionId: number): Observable<IMessage> {

@@ -4,6 +4,7 @@ import {IMessage} from "../../interface/authorization/i-message";
 import {ApiCollectionRestService} from "../../restService/api-collection/apiCollection.rest.service";
 import {IApiCategory} from "../../interface/api-collection/i-api-category";
 import {IApiCollection} from "../../interface/api-collection/i-api-collection";
+import {ISetAccessControl} from "../../interface/api-collection/i-set-access-control";
 
 @Injectable({
   providedIn: 'root'
@@ -30,13 +31,8 @@ export class ApiCollectionService {
     return this.apiCollectionRestService.createNewApiCollection(apiCollectionDetail);
   }
 
-
-  giveAccessControl(vendorId: string, apiCollectionId: number[]): Observable<IMessage> {
-    return this.apiCollectionRestService.giveAccessControl(vendorId, apiCollectionId);
-  }
-
-  revokeAccessControl(vendorId: string, apiCollectionId: number[]): Observable<IMessage> {
-    return this.apiCollectionRestService.revokeAccessControl(vendorId, apiCollectionId);
+  setAccessControl(setAccessControl:ISetAccessControl): Observable<IMessage> {
+    return this.apiCollectionRestService.setAccessControl(setAccessControl);
   }
 
   deleteCollection(apiCollectionId: number): Observable<IMessage> {

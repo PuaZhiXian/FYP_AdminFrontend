@@ -7,6 +7,7 @@ import {VendorService} from "../../../../service/vendor/vendor.service";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {NzModalService} from "ng-zorro-antd/modal";
 import {ApiCollectionService} from "../../../../service/api-collection/apiCollection.service";
+import {ISetAccessControl} from "../../../../interface/api-collection/i-set-access-control";
 
 @Component({
   selector: 'access-control',
@@ -79,7 +80,7 @@ export class AccessControlComponent implements OnInit {
         nzOkText: 'Yes',
         nzOkType: 'primary',
         nzOkDanger: true,
-        nzOnOk: () => this.giveAccessControl(this.vendorId, [apiCollectionId], false),
+        nzOnOk: () => this.giveRevokeAccessControl(this.vendorId, [apiCollectionId], false),
         nzCancelText: 'No'
       });
     } else {
@@ -89,34 +90,31 @@ export class AccessControlComponent implements OnInit {
         nzOkText: 'Yes',
         nzOkType: 'primary',
         nzOkDanger: true,
-        nzOnOk: () => this.giveAccessControl(this.vendorId, [apiCollectionId], true),
+        nzOnOk: () => this.giveRevokeAccessControl(this.vendorId, [apiCollectionId], true),
         nzCancelText: 'No'
       });
     }
   }
 
-  giveAccessControl(vendorId: string, apiCollectionId: number[], give: boolean) {
-    if (give) {
-      this.apiCollectionService.giveAccessControl(vendorId, apiCollectionId)
-        .pipe(finalize(() => {
-          this.initApiCategoryList();
-          this.ref.detectChanges();
-          this.ref.markForCheck();
-        }))
-        .subscribe((resp) => {
-
-        })
-    } else {
-      this.apiCollectionService.revokeAccessControl(vendorId, apiCollectionId)
-        .pipe(finalize(() => {
-          this.initApiCategoryList();
-          this.ref.detectChanges();
-          this.ref.markForCheck();
-        }))
-        .subscribe((resp) => {
-
-        })
+  giveRevokeAccessControl(vendorId: string, apiCollectionId: number[], give: boolean) {
+    let requestBody: ISetAccessControl = {
+      vendor_id: vendorId,
+      give: give ? apiCollectionId : [],
+      revoke: give ? [] : apiCollectionId
     }
+    this.apiCollectionService.setAccessControl(requestBody)
+      .pipe(finalize(() => {
+        this.initApiCategoryList();
+        this.ref.detectChanges();
+        this.ref.markForCheck();
+      }))
+      .subscribe((resp) => {
+        if (resp.message) {
+          this.message.success(resp.message)
+        } else {
+          this.message.error(resp.error || "")
+        }
+      })
   }
 }
 
