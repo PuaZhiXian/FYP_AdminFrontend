@@ -1,7 +1,5 @@
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
-import {VendorRestService} from "../../restService/vendor/vendor.rest.service";
-import {IUser} from "../../interface/user/i-user";
 import {NotificationRestService} from "../../restService/notification/notification.rest.service";
 import {INotification} from "../../interface/notification/i-notification";
 import {IMessage} from "../../interface/authorization/i-message";
@@ -26,6 +24,9 @@ export class NotificationService {
 
   getNotificationEventList():Observable<ICalendarEvent[][][]>{
     return this.notificationRestService.getNotificationEventList();
+  }
+  createNotification(any:any):Observable<any>{
+    return this.notificationRestService.createNotification(any);
   }
 
 }

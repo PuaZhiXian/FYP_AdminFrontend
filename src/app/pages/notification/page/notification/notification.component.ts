@@ -4,6 +4,15 @@ import {ICalendarEvent} from "../../../../interface/calendar/i-calendar-event";
 import {NotificationService} from "../../../../service/notification/notification.service";
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 
+interface temp {
+  "title": string,
+  "description": string
+  "announcement_text": string,
+  "isActive": boolean,
+  "startDate": Date,
+  "endDate": Date
+}
+
 @Component({
   selector: 'app-notification',
   templateUrl: './notification.component.html',
@@ -12,7 +21,7 @@ import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 export class NotificationComponent implements OnInit {
 
   htmlContent: string = '';
-  createNotificationDrawerVisibility: boolean = true;
+  createNotificationDrawerVisibility: boolean = false;
   editNotification: boolean = false;
   validateForm!: UntypedFormGroup;
   color: string = 'green';
@@ -81,7 +90,22 @@ export class NotificationComponent implements OnInit {
   }
 
   createNotification() {
-    console.log('creating notification on date  ');
+    console.log(this.htmlContent)
+
+    let request = {
+      data: {
+        "title": "afsfsa F",
+        "description": "dfdsfdsgdsg",
+        "announcement_text": this.htmlContent,
+        "isActive": true,
+        "startDate": "2023-12-09T17:15:00.000Z",
+        "endDate": "2024-12-10T16:45:00.000Z"
+      }
+    }
+    this.notificationService.createNotification(request)
+      .subscribe((resp) => {
+        console.log(resp)
+      })
   }
 
   openNotificationDrawer(eventId: string | Date) {

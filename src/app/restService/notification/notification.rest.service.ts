@@ -28,5 +28,8 @@ export class NotificationRestService {
     return this.httpClient.get<ICalendarEvent[][][]>(this.ProjectUrl + '/custom/get-announcement-event-list', {withCredentials: true});
   }
 
+  createNotification(any: any): Observable<any> {
+    return this.httpClient.post<any>(this.ProjectUrl + '/announcements', any, {withCredentials: true});
+  }
 
 }
