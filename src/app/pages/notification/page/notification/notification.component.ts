@@ -54,6 +54,7 @@ export class NotificationComponent implements OnInit {
     [],
     [],
   ]
+  loadingEditNotificationDrawer: boolean = true;
 
   constructor(private notificationService: NotificationService,
               private fb: UntypedFormBuilder,
@@ -129,6 +130,11 @@ export class NotificationComponent implements OnInit {
     this.editNotification = true;
     this.createNotificationDrawerVisibility = true;
     /*    this.notificationService.getSingleNotification(eventId)
+    .pipe(finalize(() => {
+        this.loadingEditNotificationDrawer = false;
+        this.ref.detectChanges();
+        this.ref.markForCheck();
+      }))
           .subscribe((resp) => {
             this.validateForm.patchValue({
               id: resp.id,

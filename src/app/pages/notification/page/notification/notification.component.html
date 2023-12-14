@@ -5,8 +5,8 @@
 
   <div class="container md:mx-auto md:px-0 px-[20px]">
 
-<!--    <calendar [eventList]="eventList" (callClickEventOnDateRequest)="openNotificationDrawer($event)"
-              (callClickEventOnEventRequest)="openNotificationDrawer($event)"></calendar>-->
+    <!--    <calendar [eventList]="eventList" (callClickEventOnDateRequest)="openNotificationDrawer($event)"
+                  (callClickEventOnEventRequest)="openNotificationDrawer($event)"></calendar>-->
 
     <calendar [eventList]="temp" (callClickEventOnDateRequest)="openNotificationDrawerCreate($event)"
               (callClickEventOnEventRequest)="openNotificationDrawerEdit($event)"></calendar>
@@ -19,61 +19,63 @@
   nzPlacement="right" [nzTitle]="editNotification ? 'Edit Notification' : 'Create Notification'"
   (nzOnClose)="closeNotificationDrawer()">
   <ng-container *nzDrawerContent>
-    <form nz-form [formGroup]="validateForm">
-      <!--Title-->
-      <div>
-        <nz-form-item class="flex items-center">
-          <nz-form-label nzRequired nzFor="title">Title</nz-form-label>
-          <nz-form-control nzErrorTip="Please input title">
-            <input class="rounded py-[10px] px-[12px] text-[#8898aa] text-input shadow-md" nz-input
-                   formControlName="title" id="title" placeholder="Email"/>
-          </nz-form-control>
-        </nz-form-item>
-      </div>
-      <!--Project Description-->
-      <div>
-        <nz-form-item class="flex items-center">
-          <nz-form-label nzFor="description">Description</nz-form-label>
-          <nz-form-control nzErrorTip="Please input your project description!">
-            <div class="">
+    <div *ngIf="!loadingEditNotificationDrawer ; else loadingTpl">
+      <form nz-form [formGroup]="validateForm">
+        <!--Title-->
+        <div>
+          <nz-form-item class="flex items-center">
+            <nz-form-label nzRequired nzFor="title">Title</nz-form-label>
+            <nz-form-control nzErrorTip="Please input title">
+              <input class="rounded py-[10px] px-[12px] text-[#8898aa] text-input shadow-md" nz-input
+                     formControlName="title" id="title" placeholder="Email"/>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <!--Project Description-->
+        <div>
+          <nz-form-item class="flex items-center">
+            <nz-form-label nzFor="description">Description</nz-form-label>
+            <nz-form-control nzErrorTip="Please input your project description!">
+              <div class="">
               <textarea class="rounded  text-input" formControlName="description" nz-input rows="4"
                         placeholder="Enter Project Description"></textarea>
-            </div>
-          </nz-form-control>
-        </nz-form-item>
-      </div>
-      <!--Select Date-->
-      <div>
-        <nz-form-item class="flex items-center">
-          <nz-form-label nzRequired>Period</nz-form-label>
-          <nz-form-control>
-            <nz-range-picker nzShowTime formControlName="rangeDate"></nz-range-picker>
-          </nz-form-control>
-        </nz-form-item>
-      </div>
-      <!--Color-->
-      <div class="mb-[10px]">
-        <div class="font-bold text-doc-title">Color</div>
-        <div class="flex items-center gap-3">
-          <div (click)="changeColor('green')"
-               class="cursor-pointer h-[40px] w-[40px] rounded-md hover:border-2 hover:border-solid hover:p-[4px] border-sky-600
+              </div>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <!--Select Date-->
+        <div>
+          <nz-form-item class="flex items-center">
+            <nz-form-label nzRequired>Period</nz-form-label>
+            <nz-form-control>
+              <nz-range-picker nzShowTime formControlName="rangeDate"></nz-range-picker>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <!--Color-->
+        <div class="mb-[10px]">
+          <div class="font-bold text-doc-title">Color</div>
+          <div class="flex items-center gap-3">
+            <div (click)="changeColor('green')"
+                 class="cursor-pointer h-[40px] w-[40px] rounded-md hover:border-2 hover:border-solid hover:p-[4px] border-sky-600
                     {{notificationColor === 'green' ? 'p-[4px] border border-solid border-2': ''}}">
-            <div class="bg-green-400 h-full w-full"></div>
-          </div>
-          <div (click)="changeColor('yellow')"
-               class="cursor-pointer h-[40px] w-[40px] rounded-md hover:border-2 hover:border-solid hover:p-[4px] border-sky-600
+              <div class="bg-green-400 h-full w-full"></div>
+            </div>
+            <div (click)="changeColor('yellow')"
+                 class="cursor-pointer h-[40px] w-[40px] rounded-md hover:border-2 hover:border-solid hover:p-[4px] border-sky-600
                     {{notificationColor === 'yellow' ? 'p-[4px] border border-2 border-solid': ''}}">
-            <div class="bg-yellow-400 h-full w-full"></div>
-          </div>
-          <div (click)="changeColor('red')"
-               class="cursor-pointer h-[40px] w-[40px] rounded-md hover:border-2 hover:border-solid hover:p-[4px] border-sky-600
+              <div class="bg-yellow-400 h-full w-full"></div>
+            </div>
+            <div (click)="changeColor('red')"
+                 class="cursor-pointer h-[40px] w-[40px] rounded-md hover:border-2 hover:border-solid hover:p-[4px] border-sky-600
                     {{notificationColor === 'red' ? 'p-[4px] border border-2 border-solid': ''}}">
-            <div class="bg-rose-400 h-full w-full"></div>
+              <div class="bg-rose-400 h-full w-full"></div>
+            </div>
           </div>
         </div>
-      </div>
-    </form>
-    <rich-text-editor [(htmlContent)]="htmlContent"></rich-text-editor>
+      </form>
+      <rich-text-editor [(htmlContent)]="htmlContent"></rich-text-editor>
+    </div>
   </ng-container>
 </nz-drawer>
 <ng-template #footerTpl>
@@ -82,4 +84,8 @@
             (click)="createSaveNotification()" nz-button>{{editNotification ? 'Save' : 'Create'}}
     </button>
   </div>
+</ng-template>
+
+<ng-template #loadingTpl>
+  <nz-skeleton></nz-skeleton>
 </ng-template>

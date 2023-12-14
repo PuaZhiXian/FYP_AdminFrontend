@@ -15,6 +15,7 @@ import {NzFormModule} from "ng-zorro-antd/form";
 import {NzInputModule} from "ng-zorro-antd/input";
 import {NzDatePickerModule} from "ng-zorro-antd/date-picker";
 import {NzMessageModule} from "ng-zorro-antd/message";
+import {NzSkeletonModule} from "ng-zorro-antd/skeleton";
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import {NzMessageModule} from "ng-zorro-antd/message";
     NzInputModule,
     NzDatePickerModule,
     NzMessageModule,
+    NzSkeletonModule,
   ]
 })
 export class NotificationModule {
