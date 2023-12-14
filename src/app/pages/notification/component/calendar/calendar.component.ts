@@ -34,31 +34,13 @@ export class CalendarComponent implements OnInit {
     let tempCalendarDate: ICalendarFormat[] = [];
 
     //create previous month day
-    /*if (this.currMonth < 0 || this.currMonth > 11) { // if current month is less than 0 or greater than 11
-      // creating a new date of current year & month and pass it as date value
-      this.date = new Date(this.currYear, this.currMonth, new Date().getDate());
-      this.currYear = this.date.getFullYear(); // updating current year with new date year
-      this.currMonth = this.date.getMonth(); // updating current month with new date month
-    }*/
-
-    let previousMonth: number = this.currMonth - 1;
     for (let i = firstDayofMonth; i > 0; i--) {
-      if (previousMonth < 0) {
-        // current month is Jan
-        tempCalendarDate.push(
-          {
-            date: new Date(this.currYear - 1, 11, lastDateofLastMonth - i + 1),
-            info: 'previous'
-          }
-        )
-      } else {
-        tempCalendarDate.push(
-          {
-            date: new Date(this.currYear, this.currMonth - 1, lastDateofLastMonth - i + 1),
-            info: 'previous'
-          }
-        )
-      }
+      tempCalendarDate.push(
+        {
+          date: new Date(this.currYear , this.currMonth - 1, lastDateofLastMonth - i + 1),
+          info: 'previous'
+        }
+      )
     }
 
     //create current month day
@@ -74,24 +56,15 @@ export class CalendarComponent implements OnInit {
     }
 
     //create future month
-    let nextMonth: number = this.currMonth - 1;
-    for (let i = lastDayofMonth; i < 6; i++) {
-      if (previousMonth > 11) {
-        // current month is Dec
-        tempCalendarDate.push(
-          {
-            date: new Date(this.currYear + 1, 0, i - lastDayofMonth + 1),
-            info: 'future'
-          }
-        )
-      } else {
-        tempCalendarDate.push(
-          {
-            date: new Date(this.currYear, this.currMonth + 1, i - lastDayofMonth + 1),
-            info: 'future'
-          }
-        )
-      }
+    let i = lastDayofMonth;
+    while(tempCalendarDate.length < 42){
+      tempCalendarDate.push(
+        {
+          date: new Date(this.currYear, this.currMonth + 1, i - lastDayofMonth + 1),
+          info: 'future'
+        }
+      )
+      i++;
     }
     this.calendarDate = this.splitArrayBy7(tempCalendarDate)
   }
