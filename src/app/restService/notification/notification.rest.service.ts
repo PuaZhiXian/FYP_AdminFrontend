@@ -30,14 +30,17 @@ export class NotificationRestService {
   }
 
   createNotification(notification: INotification): Observable<IMessage> {
+    //TODO : api save and create use same endpoint, do if chcking
     return this.httpClient.post<IMessage>(this.ProjectUrl + '/announcements', notification, {withCredentials: true});
   }
 
   getSingleNotification(eventId: string): Observable<INotification> {
+    //TODO : api
     return this.httpClient.get<INotification>(this.ProjectUrl + '/TODO' + eventId, {withCredentials: true});
   }
 
   getNotificationAlertList(): Observable<INotificationAlert[]> {
+    //TODO : api
     return this.httpClient.get<INotificationAlert[]>(this.ProjectUrl + '/custom/get-announcement-list', {withCredentials: true});
   }
 
