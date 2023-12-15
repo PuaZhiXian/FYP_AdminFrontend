@@ -1,17 +1,7 @@
 <nz-card>
   <div class="flex items-center">
     <div class="w-1/2">
-      <form nz-form [formGroup]="validateForm">
-        <nz-form-item class="mb-0">
-          <nz-form-control>
-            <nz-input-group nzSearch nzSize="large" class="rounded bg-[#F5F5F5] focus:shadow-xl active:shadow-xl "
-                            [nzPrefix]="prefixIcon">
-              <input class="bg-[#F5F5F5] text-[#52606D] text-input" formControlName="searchKey"
-                     placeholder="Search Project" nz-input/>
-            </nz-input-group>
-          </nz-form-control>
-        </nz-form-item>
-      </form>
+      <search-bar placeholder="Search Project" (filter)="searching($event)"></search-bar>
     </div>
   </div>
   <div class="my-6" *ngIf="!loadingTable; else loadingTpl">
@@ -74,6 +64,3 @@
   <nz-skeleton></nz-skeleton>
 </ng-template>
 
-<ng-template #prefixIcon>
-  <span class=" text-[#52606D] material-icons-outlined text-input">search</span>
-</ng-template>

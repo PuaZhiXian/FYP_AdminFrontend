@@ -24,6 +24,7 @@ import {NzTableModule} from "ng-zorro-antd/table";
 import {NzFormModule} from "ng-zorro-antd/form";
 import {NzInputModule} from "ng-zorro-antd/input";
 import {NzToolTipModule} from "ng-zorro-antd/tooltip";
+import {UIModule} from "../UI/UI.module";
 
 
 @NgModule({
@@ -36,30 +37,31 @@ import {NzToolTipModule} from "ng-zorro-antd/tooltip";
   exports: [
     UserComponent
   ],
-  imports: [
-    NzMessageModule,
-    UserRoutingModule,
-    HeaderModule,
-    NzCardModule,
-    NzProgressModule,
-    CommonModule,
-    NzSelectModule,
-    FormsModule,
-    DashboardModule,
-    NzDividerModule,
-    NzTabsModule,
-    NzAvatarModule,
-    NzCollapseModule,
-    NzSkeletonModule,
-    NzEmptyModule,
-    NzSpinModule,
-    NzIconModule,
-    NzTableModule,
-    NzFormModule,
-    ReactiveFormsModule,
-    NzInputModule,
-    NzToolTipModule,
-  ]
+    imports: [
+        NzMessageModule,
+        UserRoutingModule,
+        HeaderModule,
+        NzCardModule,
+        NzProgressModule,
+        CommonModule,
+        NzSelectModule,
+        FormsModule,
+        DashboardModule,
+        NzDividerModule,
+        NzTabsModule,
+        NzAvatarModule,
+        NzCollapseModule,
+        NzSkeletonModule,
+        NzEmptyModule,
+        NzSpinModule,
+        NzIconModule,
+        NzTableModule,
+        NzFormModule,
+        ReactiveFormsModule,
+        NzInputModule,
+        NzToolTipModule,
+        UIModule,
+    ]
 })
 export class UserModule {
 }

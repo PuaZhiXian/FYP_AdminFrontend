@@ -17,7 +17,6 @@ import {IApiCategory} from "../../../../interface/api-collection/i-api-category"
 })
 export class ApiCollectionComponent implements OnInit {
 
-  validateForm!: UntypedFormGroup;
   createNewCategoryForm!: UntypedFormGroup;
   createNewCollectionForm!: UntypedFormGroup;
   apiCategoryList: IApiCategory[] = [];
@@ -47,7 +46,7 @@ export class ApiCollectionComponent implements OnInit {
   ];
 
   selectedAlphabet: string = 'A';
-
+  searchKey: string = '';
 
   constructor(private router: Router,
               private fb: UntypedFormBuilder,
@@ -60,9 +59,7 @@ export class ApiCollectionComponent implements OnInit {
 
   ngOnInit(): void {
     HeaderComponent.headerIndicator = 'api';
-    this.initForm();
     this.initApiCategoryList();
-    this.changeHandler();
   }
 
   handleChange({file, fileList}: NzUploadChangeParam): void {
@@ -90,12 +87,6 @@ export class ApiCollectionComponent implements OnInit {
       })
   }
 
-  initForm() {
-    this.validateForm = this.fb.group({
-      searchKey: [null, []]
-    });
-  }
-
   initCreateNewCategoryForm() {
     this.createNewCategoryForm = this.fb.group({
       category_name: [null, [Validators.required]],
@@ -112,21 +103,16 @@ export class ApiCollectionComponent implements OnInit {
     });
   }
 
-  changeHandler() {
-    this.validateForm.valueChanges.subscribe((value => {
-      this.searching();
-    }));
-  }
-
-  searching() {
-    if (!this.validateForm.value.searchKey || this.validateForm.value.searchKey.length == 0) {
+  searching(searchKey: string) {
+    this.searchKey = searchKey;
+    if (!searchKey || searchKey.length == 0) {
       this.filteredApiCategoryList = this.apiCategoryList;
     } else {
       this.filteredApiCategoryList = [];
       this.apiCategoryList.forEach(items => {
         let temp = {...items};
         temp.api_collections = items.api_collections.filter((api) => {
-          return this.isMatch(api.api_collection_name);
+          return this.isMatch(api.api_collection_name, searchKey);
         })
         this.filteredApiCategoryList.push(temp);
       })
@@ -139,20 +125,20 @@ export class ApiCollectionComponent implements OnInit {
     }
   }
 
-  isMatch(str: string): boolean {
-    return str.toLocaleLowerCase().includes(this.validateForm.value.searchKey.toLowerCase());
+  isMatch(sentence: string, word: string): boolean {
+    return sentence.toLocaleLowerCase().includes(word.toLowerCase());
   }
 
   addFilter(categoryId: number) {
     this.filterCategory.push(categoryId);
-    this.searching();
+    this.searching(this.searchKey);
   }
 
   removeFilter(categoryId: number) {
     this.filterCategory = this.filterCategory.filter((item) => {
       return item !== categoryId;
     })
-    this.searching();
+    this.searching(this.searchKey);
   }
 
   openCreateNewCategoryModal() {

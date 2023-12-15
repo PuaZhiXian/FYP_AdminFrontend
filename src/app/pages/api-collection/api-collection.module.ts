@@ -20,9 +20,10 @@ import {NzUploadModule} from "ng-zorro-antd/upload";
 import {NzAvatarModule} from "ng-zorro-antd/avatar";
 import {NzCheckboxModule} from "ng-zorro-antd/checkbox";
 import {NzEmptyModule} from "ng-zorro-antd/empty";
+import {UIModule} from "../UI/UI.module";
 
 @NgModule({
-    imports: [ApiCollectionRoutingModule, HeaderModule, NzButtonModule, NzFormModule, ReactiveFormsModule, NzInputModule, NzTableModule, CommonModule, NzSkeletonModule, NzModalModule, NzCardModule, NzMessageModule, NzToolTipModule, NzTagModule, NzDividerModule, NzUploadModule, NzAvatarModule, NzCheckboxModule, FormsModule, NzEmptyModule],
+    imports: [ApiCollectionRoutingModule, HeaderModule, NzButtonModule, NzFormModule, ReactiveFormsModule, NzInputModule, NzTableModule, CommonModule, NzSkeletonModule, NzModalModule, NzCardModule, NzMessageModule, NzToolTipModule, NzTagModule, NzDividerModule, NzUploadModule, NzAvatarModule, NzCheckboxModule, FormsModule, NzEmptyModule, UIModule],
   declarations: [ApiCollectionComponent],
   exports: [ApiCollectionComponent]
 })

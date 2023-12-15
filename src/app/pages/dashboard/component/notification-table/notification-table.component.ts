@@ -18,9 +18,6 @@ export class NotificationTableComponent implements OnInit {
   listOfColumns !: ColumnItem[];
   loadingTable: boolean = true;
 
-  validateForm!: UntypedFormGroup;
-  showToken: boolean = false;
-
   notificationList: INotification[] = [];
   filterNotificationList: INotification[] = [];
 
@@ -31,14 +28,12 @@ export class NotificationTableComponent implements OnInit {
               private ref: ChangeDetectorRef,
               private notificationService: NotificationService,
               private modal: NzModalService,
-              private message:NzMessageService) {
+              private message: NzMessageService) {
   }
 
   ngOnInit(): void {
     this.initNotification();
     this.initTable();
-    this.initForm();
-    this.changeHandler();
   }
 
   initNotification() {
@@ -109,30 +104,18 @@ export class NotificationTableComponent implements OnInit {
     ];
   }
 
-  initForm() {
-    this.validateForm = this.fb.group({
-      searchKey: [null, []]
-    });
-  }
-
-  changeHandler() {
-    this.validateForm.valueChanges.subscribe((value => {
-      this.searching();
-    }));
-  }
-
-  searching() {
-    if (!this.validateForm.value.searchKey || this.validateForm.value.searchKey.length == 0) {
+  searching(searchKey: string) {
+    if (!searchKey || searchKey.length == 0) {
       this.filterNotificationList = this.notificationList;
     } else {
       this.filterNotificationList = this.notificationList.filter((items) => {
-        return this.isMatch(items.title) || this.isMatch(items.description);
+        return this.isMatch(items.title, searchKey) || this.isMatch(items.description, searchKey);
       });
     }
   }
 
-  isMatch(str: string): boolean {
-    return str.toLocaleLowerCase().includes(this.validateForm.value.searchKey.toLowerCase());
+  isMatch(sentence: string, word: string): boolean {
+    return sentence.toLocaleLowerCase().includes(word.toLowerCase());
   }
 
   redirectToNotificationDetail() {
@@ -142,10 +125,10 @@ export class NotificationTableComponent implements OnInit {
   deleteNotification(notificationId: number) {
     this.notificationService.deleteNotification(notificationId)
       .subscribe((resp) => {
-        if(resp.message){
+        if (resp.message) {
           this.message.success(resp.message);
           this.initNotification();
-        }else if(resp.error){
+        } else if (resp.error) {
           this.message.error(resp.error);
         }
       })

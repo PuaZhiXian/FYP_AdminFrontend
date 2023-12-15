@@ -5,17 +5,7 @@
 
   <div class="container md:mx-auto md:px-0 px-[20px]">
     <div class="my-4">
-      <form nz-form [formGroup]="validateForm">
-        <nz-form-item class="mb-0">
-          <nz-form-control>
-            <nz-input-group nzSearch nzSize="large" class="rounded focus:shadow-xl active:shadow-xl "
-                            [nzPrefix]="prefixIcon">
-              <input class="text-[#52606D] text-input" formControlName="searchKey"
-                     placeholder="Search collection" nz-input/>
-            </nz-input-group>
-          </nz-form-control>
-        </nz-form-item>
-      </form>
+      <search-bar (filter)="searching($event)" placeholder="Search Collection"></search-bar>
     </div>
     <!--alphabet filter -->
     <div class="flex gap-2 mb-4">
@@ -140,10 +130,6 @@
 
   </div>
 </div>
-
-<ng-template #prefixIcon>
-  <span class=" text-[#52606D] material-icons-outlined text-input">search</span>
-</ng-template>
 
 <ng-template #loadingTpl>
   <nz-skeleton></nz-skeleton>

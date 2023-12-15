@@ -20,8 +20,6 @@ export class ProjectComponent implements OnInit {
   listOfColumns !: ColumnItem[];
   loadingTable: boolean = true;
 
-  validateForm!: UntypedFormGroup;
-
   projectList: IProjectDetail[] = [];
   filterProjectList: IProjectDetail[] = [];
 
@@ -37,8 +35,6 @@ export class ProjectComponent implements OnInit {
   ngOnInit(): void {
     this.initProjectList();
     this.initTable();
-    this.initForm();
-    this.changeHandler();
   }
 
   initProjectList() {
@@ -110,30 +106,18 @@ export class ProjectComponent implements OnInit {
     ];
   }
 
-  initForm() {
-    this.validateForm = this.fb.group({
-      searchKey: [null, []]
-    });
-  }
-
-  changeHandler() {
-    this.validateForm.valueChanges.subscribe((value => {
-      this.searching();
-    }));
-  }
-
-  searching() {
-    if (!this.validateForm.value.searchKey || this.validateForm.value.searchKey.length == 0) {
+  searching(searchKey: string) {
+    if (!searchKey || searchKey.length == 0) {
       this.filterProjectList = this.projectList;
     } else {
       this.filterProjectList = this.projectList.filter((items) => {
-        return this.isMatch(items.project_name);
+        return this.isMatch(items.project_name, searchKey);
       });
     }
   }
 
-  isMatch(str: string): boolean {
-    return str.toLocaleLowerCase().includes(this.validateForm.value.searchKey.toLowerCase());
+  isMatch(sentence: string, word: string): boolean {
+    return sentence.toLocaleLowerCase().includes(word.toLowerCase());
   }
 
   conformingBlockProject(projectId: number, projectName: string) {
