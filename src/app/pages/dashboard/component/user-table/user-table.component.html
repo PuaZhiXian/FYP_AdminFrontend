@@ -2,17 +2,7 @@
   <nz-card>
     <div class="flex justify-between items-center">
       <div class="w-1/2">
-        <form nz-form [formGroup]="validateForm">
-          <nz-form-item class="mb-0">
-            <nz-form-control>
-              <nz-input-group nzSearch nzSize="large" class="rounded bg-[#F5F5F5] focus:shadow-xl active:shadow-xl "
-                              [nzPrefix]="prefixIcon">
-                <input class="bg-[#F5F5F5] text-[#52606D] text-input" formControlName="searchKey"
-                       placeholder="Search User" nz-input/>
-              </nz-input-group>
-            </nz-form-control>
-          </nz-form-item>
-        </form>
+        <search-bar placeholder="Search User" (filter)="searching($event)"></search-bar>
       </div>
       <div class="">
         <button class="bg-primary-900 text-white px-[32px]rounded text-button font-bold"

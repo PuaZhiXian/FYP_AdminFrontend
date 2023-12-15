@@ -38,8 +38,6 @@ export class UserTableComponent implements OnInit {
   ngOnInit(): void {
     this.initUserList();
     this.initTable();
-    this.initForm();
-    this.changeHandler();
   }
 
   initUserList() {
@@ -100,12 +98,6 @@ export class UserTableComponent implements OnInit {
     ];
   }
 
-  initForm() {
-    this.validateForm = this.fb.group({
-      searchKey: [null, []]
-    });
-  }
-
   initAddUserModalForm() {
     this.addUserModalValidateForm = this.fb.group({
       email: [null, [Validators.required, Validators.email]],
@@ -113,24 +105,18 @@ export class UserTableComponent implements OnInit {
     });
   }
 
-  changeHandler() {
-    this.validateForm.valueChanges.subscribe((value => {
-      this.searching();
-    }));
-  }
-
-  searching() {
-    if (!this.validateForm.value.searchKey || this.validateForm.value.searchKey.length == 0) {
+  searching(searchKey: string) {
+    if (!searchKey || searchKey.length == 0) {
       this.filterUserList = this.userList;
     } else {
       this.filterUserList = this.userList.filter((items) => {
-        return this.isMatch(items.username) || this.isMatch(items.email);
+        return this.isMatch(items.username, searchKey) || this.isMatch(items.email, searchKey);
       });
     }
   }
 
-  isMatch(str: string): boolean {
-    return str.toLocaleLowerCase().includes(this.validateForm.value.searchKey.toLowerCase());
+  isMatch(sentence: string, word: string): boolean {
+    return sentence.toLocaleLowerCase().includes(word.toLowerCase());
   }
 
   addUserModalOpen() {
@@ -203,7 +189,7 @@ export class UserTableComponent implements OnInit {
       })
   }
 
-  openUserDetailPage(vendorId: number){
-    this.router.navigate(['user','detail',vendorId])
+  openUserDetailPage(vendorId: number) {
+    this.router.navigate(['user', 'detail', vendorId])
   }
 }

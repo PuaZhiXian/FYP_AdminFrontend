@@ -16,9 +16,10 @@ import {NzCardModule} from "ng-zorro-antd/card";
 import {NotificationTableComponent} from './component/notification-table/notification-table.component';
 import {NzMessageModule} from 'ng-zorro-antd/message';
 import {NzToolTipModule} from "ng-zorro-antd/tooltip";
+import {UIModule} from "../UI/UI.module";
 
 @NgModule({
-  imports: [DashboardRoutingModule, HeaderModule, NzButtonModule, NzFormModule, ReactiveFormsModule, NzInputModule, NzTableModule, CommonModule, NzSkeletonModule, NzModalModule, NzCardModule, NzMessageModule, NzToolTipModule],
+    imports: [DashboardRoutingModule, HeaderModule, NzButtonModule, NzFormModule, ReactiveFormsModule, NzInputModule, NzTableModule, CommonModule, NzSkeletonModule, NzModalModule, NzCardModule, NzMessageModule, NzToolTipModule, UIModule],
   declarations: [DashboardComponent, UserTableComponent, NotificationTableComponent],
   exports: [DashboardComponent, UserTableComponent, UserTableComponent]
 })
